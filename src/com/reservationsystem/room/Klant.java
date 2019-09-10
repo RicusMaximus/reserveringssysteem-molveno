@@ -1,3 +1,5 @@
+package com.reservationsystem.room;
+
 public class Klant {
     public int klantId;
     public String voorNaam;
