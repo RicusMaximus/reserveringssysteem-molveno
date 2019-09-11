@@ -1,4 +1,4 @@
-package com.reservationsystem.room;
+package com.reservationsystem.room.models;
 
 public class Klant {
     public int klantId;

@@ -1,4 +1,4 @@
-package com.reservationsystem.room;
+package com.reservationsystem.room.models;
 
 public class Reservering {
     public int reserveringsNummer;
