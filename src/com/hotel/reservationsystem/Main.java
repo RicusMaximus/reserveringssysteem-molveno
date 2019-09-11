@@ -1,6 +1,6 @@
-package com.reservationsystem.room;
+package com.hotel.reservationsystem;
 
-import com.reservationsystem.room.models.Room;
+import com.hotel.reservationsystem.models.Room;
 import java.util.ArrayList;
 import java.util.Scanner;
 
