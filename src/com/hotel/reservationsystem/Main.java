@@ -20,6 +20,7 @@ public class Main {
             System.out.println("\nType '1' to list all available rooms.");
 
             Scanner scanner = new Scanner(System.in);
+
             int userInput = Integer.parseInt(scanner.nextLine());
 
             switch (userInput) {
