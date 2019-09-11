@@ -1,8 +1,7 @@
 package com.hotel.reservationsystem.enums;
 
-enum RoomType {
+public enum Bed {
     SINGLE,
     DOUBLE,
-    DOUBLE_2,
-    PENTHOUSE;
+    BABY
 }
