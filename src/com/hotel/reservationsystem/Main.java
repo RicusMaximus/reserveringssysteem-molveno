@@ -5,8 +5,6 @@ import com.hotel.reservationsystem.models.Room;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//test
-
 public class Main {
     public static void main(String[] args) {
         ArrayList<Room> rooms = new ArrayList<>();
