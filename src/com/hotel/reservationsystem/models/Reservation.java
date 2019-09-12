@@ -1,4 +1,4 @@
-package models;
+package com.hotel.reservationsystem.models;
 
 import java.lang.reflect.Array;
 import java.util.Date;

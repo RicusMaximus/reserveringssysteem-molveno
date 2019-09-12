@@ -1,4 +1,4 @@
-package enums;
+package com.hotel.reservationsystem.enums;
 
 public enum Title {
     MR("Mr."),
