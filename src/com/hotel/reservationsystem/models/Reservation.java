@@ -1,9 +1,10 @@
 package com.hotel.reservationsystem.models;
 
-import enums.BoardType;
+import com.hotel.reservationsystem.enums.BoardType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -13,9 +14,9 @@ public class Reservation {
     private Date startDate;
     private Date endDate;
     private double totalPrice;
-    Customer customer;
-    BoardType boardType;
-
+    private Customer customer;
+    private BoardType boardType;
+    private ArrayList<Room> rooms;
 
     public Reservation (){
 
@@ -58,7 +59,6 @@ public class Reservation {
                 type = BoardType.FULL_BOARD;
                 break;
             case "all inclusive":
-            case "all-inclusive":
                 type = BoardType.ALL_INCLUSIVE;
                 break;
             default:
