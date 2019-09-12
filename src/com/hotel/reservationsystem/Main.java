@@ -29,7 +29,7 @@ public class Main {
             switch (userInput) {
                 case 1:
                     for (Room room : rooms) {
-                        if (room.isAvailability()) {
+                        if (room.isAvailable()) {
                             System.out.println("Kamer " + room.getRoomNumber() + " is beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
                         }
                     }

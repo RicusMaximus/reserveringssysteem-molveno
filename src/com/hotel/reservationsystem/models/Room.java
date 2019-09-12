@@ -11,9 +11,9 @@ public class Room
     private String bedAmount;
     private RoomType roomType;
     private boolean disabledFriendly;
-    private boolean availability;
+    private boolean available;
 
-    public Room(int roomNumber, int price, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean availability) {
+    public Room(int roomNumber, int price, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean availabile) {
         this.roomNumber = roomNumber;
         this.price = price;
         this.maxAdults = maxAdults;
@@ -21,7 +21,7 @@ public class Room
         this.bedAmount = bedAmount;
         this.roomType = roomType;
         this.disabledFriendly = disabledFriendly;
-        this.availability = availability;
+        this.available = availabile;
     }
 
     public int getRoomNumber() {
@@ -91,11 +91,11 @@ public class Room
         this.disabledFriendly = disabledFriendly;
     }
 
-    public boolean isAvailability() {
-        return availability;
+    public boolean isAvailable() {
+        return available;
     }
 
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
+    public void setAvailable(boolean availability) {
+        this.available = availability;
     }
 }
