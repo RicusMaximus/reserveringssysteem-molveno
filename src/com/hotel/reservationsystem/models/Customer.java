@@ -1,6 +1,6 @@
-package models;
+package com.hotel.reservationsystem.models;
 
-import enums.Title;
+import com.hotel.reservationsystem.enums.Title;
 
 public class Customer {
     public int customerId;
@@ -8,6 +8,4 @@ public class Customer {
     public String firstName;
     public String lastName;
     public String address;
-
-
 }
