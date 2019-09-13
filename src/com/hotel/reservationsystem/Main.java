@@ -8,15 +8,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         ArrayList<Room> rooms = new ArrayList<>();
-        rooms.add(new Room(1, 300, 2, 0, "Double",
+        rooms.add(new Room(1,2, 0, "Double",
                 RoomType.DOUBLE, true, true));
-        rooms.add(new Room(2, 200, 2, 1, "Single",
+        rooms.add(new Room(2, 2, 1, "Single",
                 RoomType.DOUBLE_2, false, true));
-        rooms.add(new Room(3, 600, 2, 0,"2x Double",
+        rooms.add(new Room(3, 2, 0,"2x Double",
                 RoomType.PENTHOUSE, true, false));
-        rooms.add(new Room(4, 900, 2, 5, "Penthouse",
+        rooms.add(new Room(4, 2, 5, "Penthouse",
                 RoomType.SINGLE, false, false));
-        rooms.add(new Room(5, 600, 2, 4, "200",
+        rooms.add(new Room(5, 2, 4, "200",
                 RoomType.SINGLE, false, true));
 
         while(true) {
@@ -30,7 +30,8 @@ public class Main {
                 case 1:
                     for (Room room : rooms) {
                         if (room.isAvailable()) {
-                            System.out.println("Kamer " + room.getRoomNumber() + " is beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
+                            System.out.println("Kamer " + room.getRoomNumber() + " is beschikbaar. Deze kamer is een "
+                                    + room.getRoomType() + ". Deze kamer kost " + room.getPrice() + " euro." );
                         }
                     }
                     break;
