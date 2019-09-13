@@ -13,17 +13,18 @@ public class Room
     private boolean disabledFriendly;
     private boolean available;
 
+
     public Room() { }
 
-    public Room(int roomNumber, int price, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean availabile) {
+    public Room(int roomNumber, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean available) {
         this.roomNumber = roomNumber;
-        this.price = price;
+        this.price = setPrice(roomType);
         this.maxAdults = maxAdults;
         this.maxChildren = maxChildren;
         this.bedAmount = bedAmount;
         this.roomType = roomType;
         this.disabledFriendly = disabledFriendly;
-        this.available = availabile;
+        this.available = available;
     }
 
     public int getRoomNumber() {
@@ -38,8 +39,22 @@ public class Room
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    private int setPrice(RoomType roomType) {
+        switch (roomType) {
+            case SINGLE:
+                price = 100;
+                break;
+            case DOUBLE:
+                price = 200;
+                break;
+            case DOUBLE_2:
+                price = 400;
+                break;
+            case PENTHOUSE:
+                price = 600;
+                break;
+        }
+        return this.price;
     }
 
     public int getMaxAdults() {
@@ -106,7 +121,6 @@ public class Room
 
         //Room dingen
         int roomNumber = UserInput.returnIntInput("\nEnter a valid Room Number:");
-        int price = UserInput.returnIntInput("\nEnter a valid price:");
         int maxAdults = UserInput.returnIntInput("\nEnter a valid maximum adults value:");
         int maxChildren = UserInput.returnIntInput("\nEnter a valid maximum children value:");
         String bedAmount = UserInput.returnStringInput("\nEnter a valid bed type/amount:");
@@ -114,7 +128,7 @@ public class Room
         boolean disabledFriendly = UserInput.returnBoolInput("\nDisabled friendly yes/no?");
         boolean available = UserInput.returnBoolInput("\nRoom currently available yes/no?");
 
-        room.add(new Room(roomNumber, price, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
+        room.add(new Room(roomNumber, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
 
         System.out.println(room.get(room.size() - 1));
 
