@@ -22,15 +22,18 @@ public class Reservation {
 
     }
 
-    public Reservation(int reservationNumber, Date startDate, Date endDate, Customer customer, BoardType boardType) {
+    public Reservation(int reservationNumber, ArrayList<Room> rooms, Date startDate, Date endDate, Customer customer, BoardType boardType) {
         this.reservationNumber = reservationNumber;
+        this.rooms = rooms;
         this.startDate = startDate;
         this.endDate = endDate;
         this.customer = customer;
         this.boardType = boardType;
+        this.reservationDate = new Date();
     }
 
-    public void createReservation () throws ParseException {
+    public Reservation createReservation (Customer customer) throws ParseException {
+        int reservationNum = (int)Math.round(Math.random() * 100);
 
         System.out.println("Enter the start date (dd/mm/yyyy): ");
         startDate = getDateInput();
@@ -41,7 +44,47 @@ public class Reservation {
         System.out.println("Enter the board type (Bed and Breakfast, Half Board, Full Board, All-inclusive): ");
         boardType = getBoardTypeInput();
 
-        reservationDate = new Date();
+        System.out.println("Which rooms do you want to reserve? These are available:\n");
+        Room.showAvailableRooms();
+        rooms = getRoomsInput();
+
+        return new Reservation(reservationNum, rooms, startDate, endDate, customer, boardType) ;
+    }
+
+    private ArrayList<Room> getRoomsInput() {
+        ArrayList<Room> availableRooms = Room.getAvailableRooms();
+        ArrayList<Room> enteredRooms = new ArrayList<>();
+        String input = null;
+        while (true) {
+            boolean roomAdded = false;
+            Scanner scanner = new Scanner(System.in);
+            input = scanner.nextLine();
+            if ( !input.matches("[0-9]+") ) { // TODO
+                if (input.equals("s")) {
+                    break;
+                }
+            }
+            int roomNumber = 0;
+            try {
+                roomNumber = Integer.parseInt(input); // Create parse error throw
+            } catch (NumberFormatException nfe) {
+                System.out.println("Please enter a valid input.");
+                break;
+            }
+            for (int i = 0; i < availableRooms.size(); i++) {
+                if (roomNumber == availableRooms.get(i).getRoomNumber()) {
+                    enteredRooms.add(availableRooms.get(i));
+                    roomAdded = true;
+                    System.out.println("Added room #" + availableRooms.get(i).getRoomNumber());
+                    break;
+                }
+            }
+            if (!roomAdded) {
+                System.out.println("Please enter the room number of an available room.");
+            }
+
+        }
+        return enteredRooms;
     }
 
     private BoardType getBoardTypeInput() {
@@ -83,5 +126,55 @@ public class Reservation {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         return new SimpleDateFormat("dd/MM/yyyy").parse(input);
+    }
+
+    public static void showReservations (ArrayList<Reservation> reservations) {
+        String message = "";
+        if (!reservations.isEmpty()) {
+            for (Reservation res : reservations) {
+                message = res.reservationNumber + ", "; // TODO Accomodate for last item in list
+            }
+        } else {
+            message = "No reservations found.";
+        }
+        System.out.println(message.substring(0, message.length() - 2) + "\n");
+        while (true) {
+            System.out.println("Enter a reservation number to view details. Enter 's' to exit.");
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
+            //if ( !input.matches("[0-9]+") ) { // TODO
+                if (input.equals("s")) {
+                    break;
+                }
+            //}
+            int reservationNumber = 0;
+            try {
+                reservationNumber = Integer.parseInt(input); // Create parse error throw
+            } catch (NumberFormatException nfe) {
+                System.out.println("Geef een geldige invoer aub.");
+                break;
+            }
+            for (int i = 0; i < reservations.size(); i++) {
+                if (reservationNumber == reservations.get(i).reservationNumber) {
+                    reservations.get(i).showReservationInfo();
+                    break;
+                }
+            }
+        }
+    }
+
+    private void showReservationInfo() {
+        System.out.println("Reserveringsnummer: " + this.reservationNumber);
+        System.out.println("Reserveringsdatum: " + this.reservationDate);
+        System.out.println("Datum van ingang: " + this.startDate);
+        System.out.println("Einddatum: " + this.endDate);
+        System.out.println("Totale kosten reservering: " + this.totalPrice);
+        System.out.println("Naam hoofdboeker: " + this.customer.firstName + " " + this.customer.lastName);
+        System.out.println("Verzorgingstype: " + this.boardType.getBoardType());
+        String kamers = "";
+        for (Room room : rooms) {
+            kamers += room.getRoomNumber() + ", ";
+        }
+        System.out.println("Kamers: " + kamers.substring(0, kamers.length() - 2));
     }
 }
