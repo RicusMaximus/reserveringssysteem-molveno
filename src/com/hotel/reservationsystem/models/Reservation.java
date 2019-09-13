@@ -1,7 +1,5 @@
 package com.hotel.reservationsystem.models;
-
 import com.hotel.reservationsystem.enums.BoardType;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

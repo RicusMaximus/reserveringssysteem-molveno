@@ -1,5 +1,4 @@
 package com.hotel.reservationsystem;
-
 import com.hotel.reservationsystem.enums.RoomType;
 import com.hotel.reservationsystem.models.Room;
 import java.util.ArrayList;
@@ -20,13 +19,14 @@ public class Main {
                 RoomType.SINGLE, false, true));
 
         while(true) {
-            System.out.println("\nType '1' to list all available rooms.");
+            System.out.println("\nType '1' to list all available rooms, '2' to list all rooms and '3' to add a new room.");
 
             Scanner scanner = new Scanner(System.in);
 
             int userInput = Integer.parseInt(scanner.nextLine());
 
             switch (userInput) {
+                //List all available rooms
                 case 1:
                     for (Room room : rooms) {
                         if (room.isAvailable()) {
@@ -34,6 +34,17 @@ public class Main {
                                     + room.getRoomType() + ". Deze kamer kost " + room.getPrice() + " euro." );
                         }
                     }
+                    break;
+                //List all rooms
+                case 2:
+                    for (Room room : rooms) {
+                        System.out.println("Kamer " + room.getRoomNumber() + " is beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
+                    }
+                    break;
+                //Add a new room
+                case 3:
+                    Room room = new Room();
+                    room.AddRoom(rooms);
                     break;
                 default:
                     System.out.println("Enter a valid input option!");

@@ -1,6 +1,6 @@
 package com.hotel.reservationsystem.models;
-
 import com.hotel.reservationsystem.enums.RoomType;
+import java.util.ArrayList;
 
 public class Room
 {
@@ -12,6 +12,9 @@ public class Room
     private RoomType roomType;
     private boolean disabledFriendly;
     private boolean available;
+
+
+    public Room() { }
 
     public Room(int roomNumber, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean available) {
         this.roomNumber = roomNumber;
@@ -111,5 +114,25 @@ public class Room
 
     public void setAvailable(boolean availability) {
         this.available = availability;
+    }
+
+    public void AddRoom(ArrayList<Room> room) {
+        boolean completeRoom = false;
+
+        //Room dingen
+        int roomNumber = UserInput.returnIntInput("\nEnter a valid Room Number:");
+        int maxAdults = UserInput.returnIntInput("\nEnter a valid maximum adults value:");
+        int maxChildren = UserInput.returnIntInput("\nEnter a valid maximum children value:");
+        String bedAmount = UserInput.returnStringInput("\nEnter a valid bed type/amount:");
+        RoomType roomType = RoomType.SINGLE; //komt nog
+        boolean disabledFriendly = UserInput.returnBoolInput("\nDisabled friendly yes/no?");
+        boolean available = UserInput.returnBoolInput("\nRoom currently available yes/no?");
+
+        room.add(new Room(roomNumber, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
+
+        System.out.println(room.get(room.size() - 1));
+
+//        System.out.println("Added new room with the following details: " + room.getRoomNumber() + room.getRoomType()
+//            + room.getBedAmount());
     }
 }
