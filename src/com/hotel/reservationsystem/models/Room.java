@@ -13,7 +13,6 @@ public class Room
     private boolean disabledFriendly;
     private boolean available;
 
-
     public Room() { }
 
     public Room(int roomNumber, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean available) {
@@ -116,8 +115,40 @@ public class Room
         this.available = availability;
     }
 
+    public static ArrayList<Room> getAvailableRooms () {
+        // TECHNICAL DEBT - Should retrieve from database
+        // List of Room objects
+        ArrayList<Room> rooms = new ArrayList<>();
+        rooms.add(new Room(1, 2, 0, "Double",
+                RoomType.DOUBLE, true, true));
+        rooms.add(new Room(2, 2, 1, "Single",
+                RoomType.DOUBLE_2, false, true));
+        rooms.add(new Room(3, 2, 0,"2x Double",
+                RoomType.PENTHOUSE, true, false));
+        rooms.add(new Room(4, 2, 5, "Penthouse",
+                RoomType.SINGLE, false, false));
+        rooms.add(new Room(5, 2, 4, "200",
+                RoomType.SINGLE, false, true));
+
+        ArrayList<Room> availableRooms = new ArrayList<>();
+
+        for (Room room : rooms) {
+            if (room.isAvailable()) {
+                availableRooms.add(room);
+            }
+        }
+        return availableRooms;
+    }
+
+    public static void showAvailableRooms() {
+        ArrayList<Room> rooms = getAvailableRooms();
+        for (Room room : rooms) {
+            System.out.println(room.roomNumber + " ");
+        }
+    }
+
     public void AddRoom(ArrayList<Room> room) {
-        boolean completeRoom = false;
+        //boolean completeRoom = false;
 
         //Room dingen
         int roomNumber = UserInput.returnIntInput("\nEnter a valid Room Number:");
@@ -131,8 +162,5 @@ public class Room
         room.add(new Room(roomNumber, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
 
         System.out.println(room.get(room.size() - 1));
-
-//        System.out.println("Added new room with the following details: " + room.getRoomNumber() + room.getRoomType()
-//            + room.getBedAmount());
     }
 }
