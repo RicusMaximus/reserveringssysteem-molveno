@@ -12,11 +12,13 @@ public class AddRoom {
         System.out.println(message);
         String returnValue = null;
 
-        try {
-            returnValue = scanner.nextLine();
-        }
-        catch (Exception nfe) {
-            System.out.println("Enter a valid number!");
+        while(returnValue == null){
+            try {
+                returnValue = scanner.nextLine();
+            }
+            catch (Exception nfe) {
+                System.out.println("Enter a valid number!");
+            }
         }
         return returnValue;
     }
@@ -26,11 +28,13 @@ public class AddRoom {
         Scanner scanner = new Scanner(System.in);
         int returnValue = 0;
 
-        try {
-            returnValue = Integer.parseInt(scanner.nextLine());
-        }
-        catch (Exception nfe) {
-            System.out.println("Enter a valid number!");
+        while (returnValue == 0) {
+            try {
+                returnValue = Integer.parseInt(scanner.nextLine());
+            }
+            catch (Exception nfe) {
+                System.out.println("Enter a valid number!");
+            }
         }
         return returnValue;
     }
@@ -40,11 +44,13 @@ public class AddRoom {
         Scanner scanner = new Scanner(System.in);
         boolean returnValue = false;
 
-        try {
-            returnValue = Boolean.parseBoolean(scanner.nextLine());
-        }
-        catch (Exception nfe) {
-            System.out.println("Enter a valid number!");
+        while (returnValue == false) {
+            try {
+                returnValue = Boolean.parseBoolean(scanner.nextLine());
+            }
+            catch (Exception nfe) {
+                System.out.println("Enter a valid number!");
+            }
         }
         return returnValue;
     }
@@ -63,7 +69,6 @@ public class AddRoom {
         boolean available = returnBoolInput("\nRoom currently available yes/no?");
 
         room.add(new Room(roomNumber, price, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
-
 
         System.out.println(room.get(room.size() - 1));
 
