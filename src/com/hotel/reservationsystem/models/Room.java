@@ -1,8 +1,5 @@
 package com.hotel.reservationsystem.models;
-
 import com.hotel.reservationsystem.enums.RoomType;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Room
@@ -16,15 +13,17 @@ public class Room
     private boolean disabledFriendly;
     private boolean available;
 
-    public Room(int roomNumber, int price, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean availabile) {
+    public Room() { }
+
+    public Room(int roomNumber, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean available) {
         this.roomNumber = roomNumber;
-        this.price = price;
+        this.price = setPrice(roomType);
         this.maxAdults = maxAdults;
         this.maxChildren = maxChildren;
         this.bedAmount = bedAmount;
         this.roomType = roomType;
         this.disabledFriendly = disabledFriendly;
-        this.available = availabile;
+        this.available = available;
     }
 
     public int getRoomNumber() {
@@ -39,8 +38,22 @@ public class Room
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    private int setPrice(RoomType roomType) {
+        switch (roomType) {
+            case SINGLE:
+                price = 100;
+                break;
+            case DOUBLE:
+                price = 200;
+                break;
+            case DOUBLE_2:
+                price = 400;
+                break;
+            case PENTHOUSE:
+                price = 600;
+                break;
+        }
+        return this.price;
     }
 
     public int getMaxAdults() {
@@ -106,15 +119,15 @@ public class Room
         // TECHNICAL DEBT - Should retrieve from database
         // List of Room objects
         ArrayList<Room> rooms = new ArrayList<>();
-        rooms.add(new Room(1, 300, 2, 0, "Double",
+        rooms.add(new Room(1, 2, 0, "Double",
                 RoomType.DOUBLE, true, true));
-        rooms.add(new Room(2, 200, 2, 1, "Single",
+        rooms.add(new Room(2, 2, 1, "Single",
                 RoomType.DOUBLE_2, false, true));
-        rooms.add(new Room(3, 600, 2, 0,"2x Double",
+        rooms.add(new Room(3, 2, 0,"2x Double",
                 RoomType.PENTHOUSE, true, false));
-        rooms.add(new Room(4, 900, 2, 5, "Penthouse",
+        rooms.add(new Room(4, 2, 5, "Penthouse",
                 RoomType.SINGLE, false, false));
-        rooms.add(new Room(5, 600, 2, 4, "200",
+        rooms.add(new Room(5, 2, 4, "200",
                 RoomType.SINGLE, false, true));
 
         ArrayList<Room> availableRooms = new ArrayList<>();
@@ -132,5 +145,22 @@ public class Room
         for (Room room : rooms) {
             System.out.println(room.roomNumber + " ");
         }
+    }
+
+    public void AddRoom(ArrayList<Room> room) {
+        //boolean completeRoom = false;
+
+        //Room dingen
+        int roomNumber = UserInput.returnIntInput("\nEnter a valid Room Number:");
+        int maxAdults = UserInput.returnIntInput("\nEnter a valid maximum adults value:");
+        int maxChildren = UserInput.returnIntInput("\nEnter a valid maximum children value:");
+        String bedAmount = UserInput.returnStringInput("\nEnter a valid bed type/amount:");
+        RoomType roomType = RoomType.SINGLE; //komt nog
+        boolean disabledFriendly = UserInput.returnBoolInput("\nDisabled friendly yes/no?");
+        boolean available = UserInput.returnBoolInput("\nRoom currently available yes/no?");
+
+        room.add(new Room(roomNumber, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
+
+        System.out.println(room.get(room.size() - 1));
     }
 }

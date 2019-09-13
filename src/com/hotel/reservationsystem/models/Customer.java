@@ -1,5 +1,4 @@
 package com.hotel.reservationsystem.models;
-
 import com.hotel.reservationsystem.enums.Title;
 
 public class Customer {

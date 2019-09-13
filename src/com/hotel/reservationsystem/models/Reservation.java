@@ -1,7 +1,5 @@
 package com.hotel.reservationsystem.models;
-
 import com.hotel.reservationsystem.enums.BoardType;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -135,7 +133,7 @@ public class Reservation {
                 message = res.reservationNumber + ", "; // TODO Accomodate for last item in list
             }
         } else {
-            message = "No reservations found.";
+            message = "No reservations found.  ";
         }
         System.out.println(message.substring(0, message.length() - 2) + "\n");
         while (true) {
