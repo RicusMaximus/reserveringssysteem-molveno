@@ -44,7 +44,6 @@ public class Main {
                 case 3:
                     Room room = new Room();
                     room.AddRoom(rooms);
-
                     break;
                 default:
                     System.out.println("Enter a valid input option!");

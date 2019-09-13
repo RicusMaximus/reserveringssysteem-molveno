@@ -110,7 +110,7 @@ public class Room
         int maxAdults = UserInput.returnIntInput("\nEnter a valid maximum adults value:");
         int maxChildren = UserInput.returnIntInput("\nEnter a valid maximum children value:");
         String bedAmount = UserInput.returnStringInput("\nEnter a valid bed type/amount:");
-        RoomType roomType = RoomType.SINGLE;//komt nog
+        RoomType roomType = RoomType.SINGLE; //komt nog
         boolean disabledFriendly = UserInput.returnBoolInput("\nDisabled friendly yes/no?");
         boolean available = UserInput.returnBoolInput("\nRoom currently available yes/no?");
 
