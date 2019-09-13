@@ -2,6 +2,9 @@ package com.hotel.reservationsystem.models;
 
 import com.hotel.reservationsystem.enums.RoomType;
 
+import java.sql.SQLOutput;
+import java.util.Scanner;
+
 public class Room
 {
     private int roomNumber;
@@ -12,6 +15,8 @@ public class Room
     private RoomType roomType;
     private boolean disabledFriendly;
     private boolean available;
+
+    private Room() { }
 
     public Room(int roomNumber, int price, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean availabile) {
         this.roomNumber = roomNumber;

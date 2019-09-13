@@ -20,7 +20,7 @@ public class Main {
                 RoomType.SINGLE, false, true));
 
         while(true) {
-            System.out.println("\nType '1' to list all available rooms.");
+            System.out.println("\nType '1' to list all available rooms, '2' to add a new room.");
 
             Scanner scanner = new Scanner(System.in);
 
@@ -33,6 +33,10 @@ public class Main {
                             System.out.println("Kamer " + room.getRoomNumber() + " is beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
                         }
                     }
+                    break;
+                case 2:
+                    AddRoom dinges = new AddRoom();
+                    dinges.AddRoom(rooms);
                     break;
                 default:
                     System.out.println("Enter a valid input option!");
