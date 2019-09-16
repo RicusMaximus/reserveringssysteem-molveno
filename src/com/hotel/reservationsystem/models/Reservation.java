@@ -100,6 +100,7 @@ public class Reservation {
                 type = BoardType.FULL_BOARD;
                 break;
             case "all inclusive":
+            case "all-inclusive":
                 type = BoardType.ALL_INCLUSIVE;
                 break;
             default:
