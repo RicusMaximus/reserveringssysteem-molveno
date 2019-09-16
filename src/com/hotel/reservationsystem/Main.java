@@ -1,4 +1,5 @@
 package com.hotel.reservationsystem;
+import com.hotel.reservationsystem.controllers.RoomController;
 import com.hotel.reservationsystem.enums.RoomType;
 import com.hotel.reservationsystem.models.Customer;
 import com.hotel.reservationsystem.models.Reservation;
@@ -12,19 +13,10 @@ public class Main {
     public static void main(String[] args) throws ParseException {
         Reservation reservation = new Reservation();
         Customer customer = new Customer();
+        Room room = new Room();
+
         ArrayList<Reservation> reservations = new ArrayList<>();
 
-        ArrayList<Room> rooms = new ArrayList<>();
-        rooms.add(new Room(1,2, 0, "Double",
-                RoomType.DOUBLE, true, true));
-        rooms.add(new Room(2, 2, 1, "Single",
-                RoomType.DOUBLE_2, false, true));
-        rooms.add(new Room(3, 2, 0,"2x Double",
-                RoomType.PENTHOUSE, true, false));
-        rooms.add(new Room(4, 2, 5, "Penthouse",
-                RoomType.SINGLE, false, false));
-        rooms.add(new Room(5, 2, 4, "200",
-                RoomType.SINGLE, false, true));
 
         while(true) {
             System.out.println("\nType '1' to list all available rooms, Type '2' to list all rooms, Type '3' to add a new room, " +
@@ -36,16 +28,16 @@ public class Main {
             switch (userInput) {
                 //List all available rooms
                 case 1:
-                    Room.showAvailableRooms();
+                    RoomController.showAvailableRooms();
                     break;
                 //List all rooms
                 case 2:
-                    Room.showAllRooms(rooms);
+                    RoomController.showAllRooms(retrieveRoomData());
                     break;
                 //Add a new room
                 case 3:
-                    Room room = new Room();
-                    room.AddRoom(rooms);
+                    RoomController model = new RoomController(room);
+                    model.AddRoom(retrieveRoomData());
                     break;
                 case 4:
                     reservations.add(reservation.createReservation(customer));
@@ -58,5 +50,21 @@ public class Main {
                     break;
             }
         }
+    }
+
+    public static ArrayList<Room> retrieveRoomData() {
+        ArrayList<Room> rooms = new ArrayList<>();
+        rooms.add(new Room(1,2, 0, "Double",
+                RoomType.DOUBLE, true, true));
+        rooms.add(new Room(2, 2, 1, "Single",
+                RoomType.DOUBLE_2, false, true));
+        rooms.add(new Room(3, 2, 0,"2x Double",
+                RoomType.PENTHOUSE, true, false));
+        rooms.add(new Room(4, 2, 5, "Penthouse",
+                RoomType.SINGLE, false, false));
+        rooms.add(new Room(5, 2, 4, "200",
+                RoomType.SINGLE, false, true));
+
+        return rooms;
     }
 }
