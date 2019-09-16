@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-        Reservation res = new Reservation();
+        Reservation reservation = new Reservation();
         Customer customer = new Customer();
         ArrayList<Reservation> reservations = new ArrayList<>();
 
@@ -31,7 +31,6 @@ public class Main {
                             "type '4' to make a reservation, Type '5' to show all reservations.");
 
             Scanner scanner = new Scanner(System.in);
-
             int userInput = Integer.parseInt(scanner.nextLine());
 
             switch (userInput) {
@@ -41,10 +40,7 @@ public class Main {
                     break;
                 //List all rooms
                 case 2:
-                    for (Room room : rooms) {
-                        // TODO: if/else statement voor available unavailable rooms
-                        System.out.println("Kamer " + room.getRoomNumber() + " is beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
-                    }
+                    Room.showAllRooms(rooms);
                     break;
                 //Add a new room
                 case 3:
@@ -52,7 +48,7 @@ public class Main {
                     room.AddRoom(rooms);
                     break;
                 case 4:
-                    reservations.add(res.createReservation(customer));
+                    reservations.add(reservation.createReservation(customer));
                     break;
                 case 5:
                     Reservation.showReservations(reservations);

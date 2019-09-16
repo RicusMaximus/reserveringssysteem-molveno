@@ -1,5 +1,7 @@
 package com.hotel.reservationsystem.models;
 import com.hotel.reservationsystem.enums.RoomType;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Room
@@ -26,6 +28,7 @@ public class Room
         this.available = available;
     }
 
+    //GETTERS and SETTERS
     public int getRoomNumber() {
         return roomNumber;
     }
@@ -115,6 +118,7 @@ public class Room
         this.available = availability;
     }
 
+    //METHODS
     public static ArrayList<Room> getAvailableRooms () {
         // TECHNICAL DEBT - Should retrieve from database
         // List of Room objects
@@ -143,14 +147,21 @@ public class Room
     public static void showAvailableRooms() {
         ArrayList<Room> rooms = getAvailableRooms();
         for (Room room : rooms) {
-            System.out.println(room.roomNumber + " ");
+            System.out.println("Kamer " + room.getRoomNumber() + " is beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
+        }
+    }
+
+    public static void showAllRooms(ArrayList<Room> rooms) {
+        for (Room room : rooms) {
+            if(room.isAvailable()){
+                System.out.println("Kamer " + room.getRoomNumber() + " is beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
+            } else {
+                System.out.println("Kamer " + room.getRoomNumber() + " is niet beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
+            }
         }
     }
 
     public void AddRoom(ArrayList<Room> room) {
-        //boolean completeRoom = false;
-
-        //Room dingen
         int roomNumber = UserInput.returnIntInput("\nEnter a valid Room Number:");
         int maxAdults = UserInput.returnIntInput("\nEnter a valid maximum adults value:");
         int maxChildren = UserInput.returnIntInput("\nEnter a valid maximum children value:");
