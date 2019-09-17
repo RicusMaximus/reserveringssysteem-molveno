@@ -39,12 +39,37 @@ public class RoomController {
         }
     }
 
+    private RoomType getBoardTypeInput() {
+        String input = UserInputController.returnStringInput("Enter a valid Room Type").toLowerCase();
+        RoomType type = null;
+
+        switch (input) {
+            case "single":
+                type = RoomType.SINGLE;
+                break;
+            case "double":
+                type = RoomType.DOUBLE;
+                break;
+            case "2x double":
+                type = RoomType.DOUBLE_2;
+                break;
+            case "penthouse":
+                type = RoomType.PENTHOUSE;
+                break;
+            default:
+                System.out.println("Please enter a valid room type.");
+                getBoardTypeInput();
+                break;
+        }
+        return type;
+    }
+
     public void AddRoom(ArrayList<Room> room) {
         int roomNumber = UserInputController.returnIntInput("\nEnter a valid Room Number:");
         int maxAdults = UserInputController.returnIntInput("\nEnter a valid maximum adults value:");
         int maxChildren = UserInputController.returnIntInput("\nEnter a valid maximum children value:");
         String bedAmount = UserInputController.returnStringInput("\nEnter a valid bed type/amount:");
-        RoomType roomType = RoomType.SINGLE; //komt nog
+        RoomType roomType = getBoardTypeInput();
         boolean disabledFriendly = UserInputController.returnBoolInput("\nDisabled friendly yes/no?");
         boolean available = UserInputController.returnBoolInput("\nRoom currently available yes/no?");
 
