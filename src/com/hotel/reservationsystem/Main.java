@@ -1,8 +1,10 @@
 package com.hotel.reservationsystem;
+import com.hotel.reservationsystem.controllers.ReservationController;
 import com.hotel.reservationsystem.enums.RoomType;
 import com.hotel.reservationsystem.models.Customer;
 import com.hotel.reservationsystem.models.Reservation;
 import com.hotel.reservationsystem.models.Room;
+import com.hotel.reservationsystem.views.ReservationView;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -10,7 +12,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
+        ReservationController resController = ReservationController.getInstance();
+        ReservationView resView = new ReservationView();
         Reservation res = new Reservation();
+
         Customer customer = new Customer();
         ArrayList<Reservation> reservations = new ArrayList<>();
 
@@ -55,7 +60,11 @@ public class Main {
                     reservations.add(res.createReservation(customer));
                     break;
                 case 5:
-                    Reservation.showReservations(reservations);
+                    resView.showReservationNumberList();
+                    resView.getReservationByInput();
+                    break;
+                case 6:
+                    resController.getReservationsFromFile();
                     break;
                 default:
                     System.out.println("Enter a valid input option!");

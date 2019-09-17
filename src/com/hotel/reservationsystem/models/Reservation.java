@@ -20,6 +20,70 @@ public class Reservation {
 
     }
 
+    public int getReservationNumber() {
+        return reservationNumber;
+    }
+
+    public void setReservationNumber(int reservationNumber) {
+        this.reservationNumber = reservationNumber;
+    }
+
+    public Date getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(Date reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public BoardType getBoardType() {
+        return boardType;
+    }
+
+    public void setBoardType(BoardType boardType) {
+        this.boardType = boardType;
+    }
+
+    public ArrayList<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(ArrayList<Room> rooms) {
+        this.rooms = rooms;
+    }
+
     public Reservation(int reservationNumber, ArrayList<Room> rooms, Date startDate, Date endDate, Customer customer, BoardType boardType) {
         this.reservationNumber = reservationNumber;
         this.rooms = rooms;
@@ -46,7 +110,7 @@ public class Reservation {
         Room.showAvailableRooms();
         rooms = getRoomsInput();
 
-        return new Reservation(reservationNum, rooms, startDate, endDate, customer, boardType) ;
+        return new Reservation(reservationNum, rooms, startDate, endDate, customer, boardType);
     }
 
     private ArrayList<Room> getRoomsInput() {
@@ -126,53 +190,4 @@ public class Reservation {
         return new SimpleDateFormat("dd/MM/yyyy").parse(input);
     }
 
-    public static void showReservations (ArrayList<Reservation> reservations) {
-        String message = "";
-        if (!reservations.isEmpty()) {
-            for (Reservation res : reservations) {
-                message = res.reservationNumber + ", "; // TODO Accomodate for last item in list
-            }
-        } else {
-            message = "No reservations found.  ";
-        }
-        System.out.println(message.substring(0, message.length() - 2) + "\n");
-        while (true) {
-            System.out.println("Enter a reservation number to view details. Enter 's' to exit.");
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
-            //if ( !input.matches("[0-9]+") ) { // TODO
-                if (input.equals("s")) {
-                    break;
-                }
-            //}
-            int reservationNumber = 0;
-            try {
-                reservationNumber = Integer.parseInt(input); // Create parse error throw
-            } catch (NumberFormatException nfe) {
-                System.out.println("Geef een geldige invoer aub.");
-                break;
-            }
-            for (int i = 0; i < reservations.size(); i++) {
-                if (reservationNumber == reservations.get(i).reservationNumber) {
-                    reservations.get(i).showReservationInfo();
-                    break;
-                }
-            }
-        }
-    }
-
-    private void showReservationInfo() {
-        System.out.println("Reserveringsnummer: " + this.reservationNumber);
-        System.out.println("Reserveringsdatum: " + this.reservationDate);
-        System.out.println("Datum van ingang: " + this.startDate);
-        System.out.println("Einddatum: " + this.endDate);
-        System.out.println("Totale kosten reservering: " + this.totalPrice);
-        System.out.println("Naam hoofdboeker: " + this.customer.firstName + " " + this.customer.lastName);
-        System.out.println("Verzorgingstype: " + this.boardType.getBoardType());
-        String kamers = "";
-        for (Room room : rooms) {
-            kamers += room.getRoomNumber() + ", ";
-        }
-        System.out.println("Kamers: " + kamers.substring(0, kamers.length() - 2));
-    }
 }
