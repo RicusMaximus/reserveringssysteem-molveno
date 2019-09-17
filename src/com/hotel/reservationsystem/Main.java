@@ -27,8 +27,7 @@ public class Main {
                 RoomType.SINGLE, false, true));
 
         while(true) {
-            System.out.println("\nTyp '1' to list all available rooms, Type '2' to list all rooms, Type '3' to add a new room, " +
-                            "type '4' to make a reservation, Type '5' to show all reservations. Typ '6' to check-in or check-out");
+            System.out.println("\nTyp '1' to list all available rooms.\nTyp '2' to list all rooms.\nTyp '3' to add a new room.\nTyp '4' to make a reservation.\nTyp '5' to show all reservations.\nTyp '6' to check-in or check-out.\nTyp 7 for a list of checked-out rooms.");
 
             Scanner scanner = new Scanner(System.in);
 
@@ -62,6 +61,10 @@ public class Main {
                 default:
                     System.out.println("Enter a valid input option!");
                     break;
+
+                case 7: Reservation.showCheckedOut(reservations);
+                break;
+
             }
         }
     }
