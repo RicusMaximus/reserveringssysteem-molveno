@@ -66,10 +66,8 @@ public class Main {
                 default:
                     System.out.println("Enter a valid input option!");
                     break;
-
                 case 7: Reservation.showCheckedOut(reservations);
                 break;
-
             }
         }
     }
