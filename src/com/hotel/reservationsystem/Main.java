@@ -40,10 +40,10 @@ public class Main {
                     model.AddRoom(retrieveRoomData());
                     break;
                 case 4:
-                    reservations.add(reservation.createReservation(customer));
+                    //reservations.add(reservation.createReservation(customer));
                     break;
                 case 5:
-                    Reservation.showReservations(reservations);
+                    //Reservation.showReservations(reservations);
                     break;
                 default:
                     System.out.println("Enter a valid input option!");
