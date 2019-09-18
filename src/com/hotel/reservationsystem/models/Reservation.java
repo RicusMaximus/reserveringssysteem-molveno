@@ -19,6 +19,16 @@ public class Reservation {
 
     public Reservation(){ }
 
+    public Reservation(int reservationNumber, ArrayList<Room> rooms, Date startDate, Date endDate, Customer customer, BoardType boardType) {
+        this.reservationNumber = reservationNumber;
+        this.rooms = rooms;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.customer = customer;
+        this.boardType = boardType;
+        this.reservationDate = new Date();
+    }
+
     public int getReservationNumber() {
         return reservationNumber;
     }
@@ -83,16 +93,6 @@ public class Reservation {
         this.rooms = rooms;
     }
 
-    public Reservation(int reservationNumber, ArrayList<Room> rooms, Date startDate, Date endDate, Customer customer, BoardType boardType) {
-        this.reservationNumber = reservationNumber;
-        this.rooms = rooms;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.customer = customer;
-        this.boardType = boardType;
-        this.reservationDate = new Date();
-    }
-
     public Reservation createReservation (Customer customer) throws ParseException {
         int reservationNum = (int)Math.round(Math.random() * 100);
 
@@ -103,25 +103,25 @@ public class Reservation {
         endDate = getDateInput();
 
         System.out.println("Enter the first name of the main booker");
-        customer.firstName = getStringInput();
+        customer.setFirstName(getStringInput());
 
         System.out.println("Enter the last name of the main booker");
-        customer.lastName = getStringInput();
+        customer.setLastName(getStringInput());
 
         System.out.println("Enter the address of the main booker");
-        customer.address = getStringInput();
+        customer.setAddress(getStringInput());
 
         System.out.println("Enter the city of residence of the main booker");
-        customer.city = getStringInput();
+        customer.setAddress(getStringInput());
 
         System.out.println("Add the phonenumber of the main booker");//TODO regular expressions
-        customer.phoneNumber = getStringInput();
+        customer.setPhoneNumber(getStringInput());
 
         System.out.println("Add the email of the main booker");
-        customer.email = getStringInput();
+        customer.setEmail(getStringInput());
 
         System.out.println("Add the date of birth of the main booker (dd/mm/yyyy)");
-        customer.birthday = getDateInput();
+        customer.setBirthday(getDateInput());
 
         System.out.println("Enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
         boardType = getBoardTypeInput();
@@ -285,7 +285,6 @@ public class Reservation {
                         default:
                             System.out.println("Please typ a '1' for check-in or a '2' for check-out.");
                     }
-
                 }
             }
         }
@@ -302,14 +301,13 @@ public class Reservation {
     }
 
     private void showReservationInfo() {
-        System.out.println("Reservationnumber: " + this.reservationNumber);
-        System.out.println("Reservationdate: " + this.reservationDate);
-        System.out.println("Check-in date: " + this.startDate);
-        System.out.println("Check-out date: " + this.endDate);
-        System.out.println("Total price booking: " + this.totalPrice);
-        System.out.println("Name main booker: " + this.customer.firstName + " " + this.customer.lastName);
-        System.out.println("Board type: " + this.boardType.getBoardType());
-        System.out.println("Checked-in: " + this.checking);
+        System.out.println("Reserveringsnummer: " + this.reservationNumber);
+        System.out.println("Reserveringsdatum: " + this.reservationDate);
+        System.out.println("Datum van ingang: " + this.startDate);
+        System.out.println("Einddatum: " + this.endDate);
+        System.out.println("Totale kosten reservering: " + this.totalPrice);
+        System.out.println("Naam hoofdboeker: " + this.customer.getFirstName() + " " + this.customer.getLastName());
+        System.out.println("Verzorgingstype: " + this.boardType.getBoardType());
         String kamers = "";
         for (Room room : rooms) {
             kamers += room.getRoomNumber() + ", ";

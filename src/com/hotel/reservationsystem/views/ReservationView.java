@@ -68,7 +68,7 @@ public class ReservationView {
         System.out.println("Datum van ingang: " + reservation.getStartDate());
         System.out.println("Einddatum: " + reservation.getEndDate());
         System.out.println("Totale kosten reservering: " + reservation.getTotalPrice());
-        System.out.println("Naam hoofdboeker: " + reservation.getCustomer().firstName + " " + reservation.getCustomer().lastName);
+        System.out.println("Naam hoofdboeker: " + reservation.getCustomer().getFirstName() + " " + reservation.getCustomer().getLastName());
         System.out.println("Verzorgingstype: " + reservation.getBoardType().getBoardType());
         String kamers = "";
         for (Room room : reservation.getRooms()) {
