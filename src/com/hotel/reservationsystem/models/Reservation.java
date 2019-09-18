@@ -97,7 +97,8 @@ public Reservation(){
                 if (roomNumber == availableRooms.get(i).getRoomNumber()) {
                     enteredRooms.add(availableRooms.get(i));
                     roomAdded = true;
-                    System.out.println("Added room #" + availableRooms.get(i).getRoomNumber());
+                    System.out.println("Room number " + availableRooms.get(i).getRoomNumber() + " is added to your reservation. " +
+                            "Press 's' to go back to the main menu.");
                     break;
                 }
             }
@@ -215,9 +216,11 @@ public Reservation(){
                     switch (input2){
                         case 1:
                             reservations.get(i).setChecking(true);
+                            System.out.println("This room is successfully checked-in");
                             break;
                         case 2:
                             reservations.get(i).setChecking(false);
+                            System.out.println("This room is successfully checked-out.");
                             break;
                         default:
                             System.out.println("Please typ a '1' for check-in or a '2' for check-out.");
@@ -230,11 +233,25 @@ public Reservation(){
 
 
     }
+
+    public static void showCheckedOut(ArrayList<Reservation> reservations) {
+        for (Reservation reservation : reservations) {
+            if (!reservation.isChecking()) {
+
+                for (Room room : reservation.rooms) {
+                    System.out.println("Kamer " + room.getRoomNumber() + " is klaar om schoongemaakt te worden.");
+                }
+            }
+        }
+    }
+
+
+
     private void showReservationInfo() {
         System.out.println("Reservationnumber: " + this.reservationNumber);
         System.out.println("Reservationdate: " + this.reservationDate);
-        System.out.println("From date: " + this.startDate);
-        System.out.println("End date: " + this.endDate);
+        System.out.println("Check-in date: " + this.startDate);
+        System.out.println("Check-out date: " + this.endDate);
         System.out.println("Total price booking: " + this.totalPrice);
         System.out.println("Name main booker: " + this.customer.firstName + " " + this.customer.lastName);
         System.out.println("Board type: " + this.boardType.getBoardType());
@@ -253,4 +270,22 @@ public Reservation(){
     public void setChecking(boolean checking) {
         this.checking = checking;
     }
+
+    public int getReservationNumber() {
+        return reservationNumber;
+    }
+
+    public void setReservationNumber(int reservationNumber) {
+        this.reservationNumber = reservationNumber;
+    }
+
+    public ArrayList<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(ArrayList<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+
 }
