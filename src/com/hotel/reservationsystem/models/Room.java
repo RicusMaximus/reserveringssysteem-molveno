@@ -142,9 +142,11 @@ public class Room
 
     public static void showAvailableRooms() {
         ArrayList<Room> rooms = getAvailableRooms();
+        String input = null;
         for (Room room : rooms) {
-            System.out.println(room.roomNumber + " ");
-        }
+            System.out.println(room.roomNumber + " is available. This room is a " + room.getRoomType() + ".");
+    }
+
     }
 
 
@@ -155,13 +157,13 @@ public class Room
         int roomNumber = UserInput.returnIntInput("\nEnter a valid Room Number:");
         int maxAdults = UserInput.returnIntInput("\nEnter a valid maximum adults value:");
         int maxChildren = UserInput.returnIntInput("\nEnter a valid maximum children value:");
-        String bedAmount = UserInput.returnStringInput("\nEnter a valid bed type/amount:");
+        String bedAmount = UserInput.returnStringInput("\nEnter a valid bed type/amount (Single, Double, Baby):");
         RoomType roomType = RoomType.SINGLE; //komt nog
         boolean disabledFriendly = UserInput.returnBoolInput("\nDisabled friendly yes/no?");
         boolean available = UserInput.returnBoolInput("\nRoom currently available yes/no?");
 
         room.add(new Room(roomNumber, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
-
-        System.out.println(room.get(room.size() - 1));
+        System.out.println("Room successfully added");
+        //System.out.println(room.get(room.size() - 1));
     }
 }

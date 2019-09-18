@@ -63,13 +63,25 @@ public class ReservationView {
     }
 
     public void showReservationInformation (Reservation reservation) {
-        System.out.println("Reserveringsnummer: " + reservation.getReservationNumber());
-        System.out.println("Reserveringsdatum: " + reservation.getReservationDate());
-        System.out.println("Datum van ingang: " + reservation.getStartDate());
-        System.out.println("Einddatum: " + reservation.getEndDate());
-        System.out.println("Totale kosten reservering: " + reservation.getTotalPrice());
-        System.out.println("Naam hoofdboeker: " + reservation.getCustomer().getFirstName() + " " + reservation.getCustomer().getLastName());
-        System.out.println("Verzorgingstype: " + reservation.getBoardType().getBoardType());
+//        System.out.println("Reserveringsnummer: " + reservation.getReservationNumber());
+//        System.out.println("Reserveringsdatum: " + reservation.getReservationDate());
+//        System.out.println("Datum van ingang: " + reservation.getStartDate());
+//        System.out.println("Einddatum: " + reservation.getEndDate());
+//        System.out.println("Totale kosten reservering: " + reservation.getTotalPrice());
+//        System.out.println("Naam hoofdboeker: " + reservation.getCustomer().getFirstName() + " " + reservation.getCustomer().getLastName());
+//        System.out.println("Verzorgingstype: " + reservation.getBoardType().getBoardType());
+        System.out.println("Reservation number: " + reservation.getReservationNumber());
+        System.out.println("Reservation date: " + reservation.getReservationDate());
+        System.out.println("Check-in date: " + reservation.getStartDate());
+        System.out.println("Check-out date: " + reservation.getEndDate());
+        System.out.println("Total costs reservation: " + reservation.getTotalPrice());
+        System.out.println("Name main booker: " + reservation.getCustomer().getFirstName() + " " + reservation.getCustomer().getLastName());
+        System.out.println("Address main booker:" + reservation.getCustomer().getAddress());
+        System.out.println("City of residence:" + reservation.getCustomer().getCity());
+        System.out.println("Phone number:" + reservation.getCustomer().getPhoneNumber());
+        System.out.println("Email of main booker:" + reservation.getCustomer().getEmail());
+        System.out.println("Date of birth of main booker:" + reservation.getCustomer().getBirthday());
+        System.out.println("Board type: " + reservation.getBoardType());
         String kamers = "";
         for (Room room : reservation.getRooms()) {
             kamers += room.getRoomNumber() + ", ";

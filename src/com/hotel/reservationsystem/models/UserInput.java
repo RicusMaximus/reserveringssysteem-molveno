@@ -39,14 +39,23 @@ public class UserInput {
         Scanner scanner = new Scanner(System.in);
         boolean returnValue = false;
 
-        while (returnValue == false) {
             try {
-                returnValue = Boolean.parseBoolean(scanner.nextLine());
+
+                if(scanner.nextLine() == "yes") {
+                    returnValue = true;
+                }
+
+                else{
+                    returnValue = false;
+                }
+
             }
+
             catch (Exception nfe) {
                 System.out.println("Enter a valid number!");
             }
-        }
+
+
         return returnValue;
     }
 }

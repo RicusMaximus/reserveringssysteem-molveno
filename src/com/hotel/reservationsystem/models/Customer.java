@@ -9,6 +9,7 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String address;
+    private String city;
     private String phoneNumber;
     private String email;
     private Date birthday;
@@ -75,5 +76,13 @@ public class Customer {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

@@ -112,9 +112,9 @@ public class Reservation {
         customer.setAddress(getStringInput());
 
         System.out.println("Enter the city of residence of the main booker");
-        customer.setAddress(getStringInput());
+        customer.setCity(getStringInput());
 
-        System.out.println("Add the phonenumber of the main booker");//TODO regular expressions
+        System.out.println("Add the phone number of the main booker");//TODO regular expressions
         customer.setPhoneNumber(getStringInput());
 
         System.out.println("Add the email of the main booker");
@@ -158,7 +158,7 @@ public class Reservation {
                     enteredRooms.add(availableRooms.get(i));
                     roomAdded = true;
                     System.out.println("Room number " + availableRooms.get(i).getRoomNumber() + " is added to your reservation. " +
-                            "Press 's' to go back to the main menu.");
+                            "Press 's' to save reservation.");
                     break;
                 }
             }
@@ -270,7 +270,7 @@ public class Reservation {
             }
             for (int i = 0; i < reservations.size(); i++) {
                 if (reservationNumber == reservations.get(i).reservationNumber) {
-                    System.out.println("Typ '1' to check-in and typ '2' to check-out.");
+                    System.out.println("Type '1' to check-in and typ '2' to check-out.");
                     int input2 = scanner.nextInt();
 
                     switch (input2){
@@ -283,7 +283,7 @@ public class Reservation {
                             System.out.println("This room is successfully checked-out.");
                             break;
                         default:
-                            System.out.println("Please typ a '1' for check-in or a '2' for check-out.");
+                            System.out.println("Please type a '1' for check-in or a '2' for check-out.");
                     }
                 }
             }
@@ -294,20 +294,25 @@ public class Reservation {
         for (Reservation reservation : reservations) {
             if (!reservation.isChecking()) {
                 for (Room room : reservation.rooms) {
-                    System.out.println("Kamer " + room.getRoomNumber() + " is klaar om schoongemaakt te worden.");
+                    System.out.println("Room " + room.getRoomNumber() + " is ready to be cleaned.");
                 }
             }
         }
     }
 
     private void showReservationInfo() {
-        System.out.println("Reserveringsnummer: " + this.reservationNumber);
-        System.out.println("Reserveringsdatum: " + this.reservationDate);
-        System.out.println("Datum van ingang: " + this.startDate);
-        System.out.println("Einddatum: " + this.endDate);
-        System.out.println("Totale kosten reservering: " + this.totalPrice);
-        System.out.println("Naam hoofdboeker: " + this.customer.getFirstName() + " " + this.customer.getLastName());
-        System.out.println("Verzorgingstype: " + this.boardType.getBoardType());
+        System.out.println("Reservation number: " + this.reservationNumber);
+        System.out.println("Reservation date: " + this.reservationDate);
+        System.out.println("Check-in date: " + this.startDate);
+        System.out.println("Check-out date: " + this.endDate);
+        System.out.println("Total costs reservation: " + this.totalPrice);
+        System.out.println("Name main booker: " + this.customer.getFirstName() + " " + this.customer.getLastName());
+        System.out.println("Address main booker:" + this.customer.getAddress());
+        System.out.println("City of residence:" + this.customer.getCity());
+        System.out.println("Phone number:" + this.customer.getPhoneNumber());
+        System.out.println("Email of main booker:" + this.customer.getEmail());
+        System.out.println("Date of birth of main booker:" + this.customer.getBirthday());
+        System.out.println("Board type: " + this.boardType.getBoardType());
         String kamers = "";
         for (Room room : rooms) {
             kamers += room.getRoomNumber() + ", ";

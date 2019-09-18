@@ -36,47 +36,62 @@ public class Main {
         rooms.add(new Room(5, 2, 4, "200",
                 RoomType.SINGLE, false, true));
 
+
+        System.out.println("\nType '1' to list all available rooms.\nType '2' to list all rooms." +
+                "\nType '3' to add a new room.\nType '4' to make a reservation.\nType '5' to show all reservations." +
+                "\nType '6' to get reservations from file. \nType '7' to check-in or check-out.\nType '8' for a list of checked-out rooms.");
+
         while(true) {
-            System.out.println("\nTyp '1' to list all available rooms.\nTyp '2' to list all rooms." +
-                    "\nTyp '3' to add a new room.\nTyp '4' to make a reservation.\nTyp '5' to show all reservations." +
-                    "\nTyp '6' to get reservations from file. \nTyp '6' to check-in or check-out.\nTyp 7 for a list of checked-out rooms.");
 
             Scanner scanner = new Scanner(System.in);
 
             int userInput = Integer.parseInt(scanner.nextLine());
 
             switch (userInput) {
+                case 0:
+                    System.out.println("\nType '1' to list all available rooms.\nType '2' to list all rooms." +
+                            "\nType '3' to add a new room.\nType '4' to make a reservation.\nType '5' to show all reservations." +
+                            "\nType '6' to get reservations from file. \nType '7' to check-in or check-out.\nType '8' for a list of checked-out rooms.");
+                    break;
                 //List all available rooms
                 case 1:
                     Room.showAvailableRooms();
+                    System.out.println("\nPress '0' to return to the menu.");
                     break;
                 //List all rooms
                 case 2:
                     for (Room room : rooms) {
                         // TODO: if/else statement voor available unavailable rooms
-                        System.out.println("Room " + room.getRoomNumber() + " is available. This room is a " + room.getRoomType() + ".");
+                        System.out.println("Room " + room.getRoomNumber() + "." + " This room is a " + room.getRoomType() + ".");
                     }
+                    System.out.println("\nPress '0' to return to the menu.");
                     break;
                 //Add a new room
                 case 3:
                     Room room = new Room();
                     room.AddRoom(rooms);
+                    System.out.println("\nPress '0' to return to the menu.");
                     break;
                 case 4:
                     reservations.add(res.createReservation(customer));
+                    System.out.println("\nPress '0' to return to the menu.");
                     break;
                 case 5:
                     resView.showReservationNumberList();
                     resView.getReservationByInput();
+                    System.out.println("\nPress '0' to return to the menu.");
                     break;
                 case 6:
                     resController.getReservationsFromFile();
+                    System.out.println("\nPress '0' to return to the menu.");
                     break;
                 case 7:
                     Reservation.checking(reservations);
+                    System.out.println("\nPress '0' to return to the menu.");
                     break;
                 case 8:
                     Reservation.showCheckedOut(reservations);
+                    System.out.println("\nPress '0' to return to the menu.");
                     break;
                 default:
                     System.out.println("Enter a valid input option!");
