@@ -17,11 +17,7 @@ public class Reservation {
     private ArrayList<Room> rooms;
     private boolean checking;
 
-public Reservation(){
-
-
-}
-
+    public Reservation(){ }
 
     public Reservation(int reservationNumber, ArrayList<Room> rooms, Date startDate, Date endDate, Customer customer, BoardType boardType) {
         this.reservationNumber = reservationNumber;
@@ -134,7 +130,7 @@ public Reservation(){
         Room.showAvailableRooms();
         rooms = getRoomsInput();
 
-        return new Reservation(reservationNum, rooms, startDate, endDate, customer, boardType) ;
+        return new Reservation(reservationNum, rooms, startDate, endDate, customer, boardType);
     }
 
     private ArrayList<Room> getRoomsInput() {
@@ -297,7 +293,6 @@ public Reservation(){
     public static void showCheckedOut(ArrayList<Reservation> reservations) {
         for (Reservation reservation : reservations) {
             if (!reservation.isChecking()) {
-
                 for (Room room : reservation.rooms) {
                     System.out.println("Kamer " + room.getRoomNumber() + " is klaar om schoongemaakt te worden.");
                 }
