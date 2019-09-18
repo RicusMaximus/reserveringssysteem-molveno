@@ -32,8 +32,9 @@ public class Main {
                 RoomType.SINGLE, false, true));
 
         while(true) {
-            System.out.println("\nType '1' to list all available rooms, Type '2' to list all rooms, Type '3' to add a new room, " +
-                            "type '4' to make a reservation, Type '5' to show all reservations.");
+            System.out.println("\nTyp '1' to list all available rooms.\nTyp '2' to list all rooms." +
+                    "\nTyp '3' to add a new room.\nTyp '4' to make a reservation.\nTyp '5' to show all reservations." +
+                    "\nTyp '6' to get reservations from file. \nTyp '6' to check-in or check-out.\nTyp 7 for a list of checked-out rooms.");
 
             Scanner scanner = new Scanner(System.in);
 
@@ -48,7 +49,7 @@ public class Main {
                 case 2:
                     for (Room room : rooms) {
                         // TODO: if/else statement voor available unavailable rooms
-                        System.out.println("Kamer " + room.getRoomNumber() + " is beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
+                        System.out.println("Room " + room.getRoomNumber() + " is available. This room is a " + room.getRoomType() + ".");
                     }
                     break;
                 //Add a new room
@@ -66,9 +67,15 @@ public class Main {
                 case 6:
                     resController.getReservationsFromFile();
                     break;
+                case 7:
+                    Reservation.checking(reservations);
                 default:
                     System.out.println("Enter a valid input option!");
                     break;
+
+                case 8: Reservation.showCheckedOut(reservations);
+                break;
+
             }
         }
     }

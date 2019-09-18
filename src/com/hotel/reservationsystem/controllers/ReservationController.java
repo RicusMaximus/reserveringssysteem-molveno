@@ -21,6 +21,7 @@ public class ReservationController {
     private ReservationController(){
         reservations = getReservationsFromFile();
     }
+
     public static ReservationController getInstance() {
         if (instance == null) {
             instance = new ReservationController();
