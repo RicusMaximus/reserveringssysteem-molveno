@@ -17,11 +17,71 @@ public class Reservation {
     private ArrayList<Room> rooms;
     private boolean checking;
 
-public Reservation(){
+    public Reservation(){ }
 
+    public int getReservationNumber() {
+        return reservationNumber;
+    }
 
-}
+    public void setReservationNumber(int reservationNumber) {
+        this.reservationNumber = reservationNumber;
+    }
 
+    public Date getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(Date reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public BoardType getBoardType() {
+        return boardType;
+    }
+
+    public void setBoardType(BoardType boardType) {
+        this.boardType = boardType;
+    }
+
+    public ArrayList<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(ArrayList<Room> rooms) {
+        this.rooms = rooms;
+    }
 
     public Reservation(int reservationNumber, ArrayList<Room> rooms, Date startDate, Date endDate, Customer customer, BoardType boardType) {
         this.reservationNumber = reservationNumber;
@@ -70,7 +130,7 @@ public Reservation(){
         Room.showAvailableRooms();
         rooms = getRoomsInput();
 
-        return new Reservation(reservationNum, rooms, startDate, endDate, customer, boardType) ;
+        return new Reservation(reservationNum, rooms, startDate, endDate, customer, boardType);
     }
 
     private ArrayList<Room> getRoomsInput() {
@@ -229,23 +289,17 @@ public Reservation(){
                 }
             }
         }
-
-
-
     }
 
     public static void showCheckedOut(ArrayList<Reservation> reservations) {
         for (Reservation reservation : reservations) {
             if (!reservation.isChecking()) {
-
                 for (Room room : reservation.rooms) {
                     System.out.println("Kamer " + room.getRoomNumber() + " is klaar om schoongemaakt te worden.");
                 }
             }
         }
     }
-
-
 
     private void showReservationInfo() {
         System.out.println("Reservationnumber: " + this.reservationNumber);
@@ -270,22 +324,4 @@ public Reservation(){
     public void setChecking(boolean checking) {
         this.checking = checking;
     }
-
-    public int getReservationNumber() {
-        return reservationNumber;
-    }
-
-    public void setReservationNumber(int reservationNumber) {
-        this.reservationNumber = reservationNumber;
-    }
-
-    public ArrayList<Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(ArrayList<Room> rooms) {
-        this.rooms = rooms;
-    }
-
-
 }
