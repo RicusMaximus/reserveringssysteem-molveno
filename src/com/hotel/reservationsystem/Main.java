@@ -1,5 +1,6 @@
 package com.hotel.reservationsystem;
 import com.hotel.reservationsystem.enums.RoomType;
+import com.hotel.reservationsystem.models.ConfirmationMessage;
 import com.hotel.reservationsystem.models.Customer;
 import com.hotel.reservationsystem.models.Reservation;
 import com.hotel.reservationsystem.models.Room;
@@ -10,6 +11,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
+
+        ConfirmationMessage confirmationMessage = new ConfirmationMessage();
+        confirmationMessage.printToFile();
+        
+
+
+
+
         Reservation res = new Reservation();
         Customer customer = new Customer();
         ArrayList<Reservation> reservations = new ArrayList<>();

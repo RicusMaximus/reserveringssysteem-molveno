@@ -30,6 +30,70 @@ public class Reservation {
         this.reservationDate = new Date();
     }
 
+    public int getReservationNumber() {
+        return reservationNumber;
+    }
+
+    public void setReservationNumber(int reservationNumber) {
+        this.reservationNumber = reservationNumber;
+    }
+
+    public Date getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(Date reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public BoardType getBoardType() {
+        return boardType;
+    }
+
+    public void setBoardType(BoardType boardType) {
+        this.boardType = boardType;
+    }
+
+    public ArrayList<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(ArrayList<Room> rooms) {
+        this.rooms = rooms;
+    }
+
     public Reservation createReservation (Customer customer) throws ParseException {
         int reservationNum = (int)Math.round(Math.random() * 100);
 
@@ -167,7 +231,7 @@ public class Reservation {
         System.out.println("Datum van ingang: " + this.startDate);
         System.out.println("Einddatum: " + this.endDate);
         System.out.println("Totale kosten reservering: " + this.totalPrice);
-        System.out.println("Naam hoofdboeker: " + this.customer.firstName + " " + this.customer.lastName);
+        System.out.println("Naam hoofdboeker: " + this.customer.getFirstName() + " " + this.customer.getLastName());
         System.out.println("Verzorgingstype: " + this.boardType.getBoardType());
         String kamers = "";
         for (Room room : rooms) {
