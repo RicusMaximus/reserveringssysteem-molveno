@@ -28,7 +28,7 @@ public class ConfirmationMessage {
     public void printToFile(){
         PrintWriter writer = null;
         try {
-            writer = new PrintWriter("C:\\Users\\cosmit\\Documents\\test\\textfile.txt");
+            writer = new PrintWriter("textfile.txt");
             writer.println("Your reservation with reservation number: " + res.getReservationNumber() + ", has been confirmed. See details below.");
             writer.println("Reservation number: " + res.getReservationNumber());
 
