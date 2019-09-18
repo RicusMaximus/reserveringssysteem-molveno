@@ -65,7 +65,7 @@ public class Main {
                     resView.getReservationByInput();
                     break;
                 case 6:
-                    resController.getReservationsFromFile();
+                    resController.getReservationList();
                     break;
                 case 7:
                     Reservation.checking(reservations);

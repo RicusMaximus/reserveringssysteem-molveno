@@ -37,18 +37,19 @@ public class UserInput {
     }
 
     public static boolean returnBoolInput (String message) {
-        System.out.println(message);
-        Scanner scanner = new Scanner(System.in);
-        boolean returnValue = false;
-
-        while (returnValue == false) {
-            try {
-                returnValue = Boolean.parseBoolean(scanner.nextLine());
-            } catch (Exception nfe) {
-                System.out.println("Enter a valid number!");
-            }
-        }
-        return returnValue;
+        throw new UnsupportedOperationException();
+//        System.out.println(message);
+//        Scanner scanner = new Scanner(System.in);
+//        boolean returnValue = false;
+//
+//        while (returnValue == false) {
+//            try {
+//                returnValue = Boolean.parseBoolean(scanner.nextLine());
+//            } catch (Exception nfe) {
+//                System.out.println("Enter a valid number!");
+//            }
+//        }
+//        return returnValue;
     }
 
     public static Date returnDateInput (String message) {
