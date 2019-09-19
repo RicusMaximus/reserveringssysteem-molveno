@@ -1,4 +1,7 @@
 package com.hotel.reservationsystem.controllers;
+import com.hotel.reservationsystem.enums.BoardType;
+import com.hotel.reservationsystem.enums.RoomType;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +31,7 @@ public class UserInputController {
 
         while (returnValue == 0) {
             try {
-                returnValue = Integer.parseInt(scanner.nextLine()); //TODO
+                returnValue = scanner.nextInt(); //TODO
             }
             catch (Exception nfe) {
                 System.out.println("Enter a valid number!");
@@ -63,6 +66,58 @@ public class UserInputController {
                 returnValue = new SimpleDateFormat("dd/MM/yyyy").parse(scanner.nextLine());
             }
             catch (ParseException nfe) {
+                System.out.println("Enter a valid type!");
+            }
+        }
+        return returnValue;
+    }
+
+    public static BoardType returnBoardTypeInput(String message) {
+        System.out.println(message);
+        Scanner scanner = new Scanner(System.in);
+        BoardType returnValue = null;
+
+        while (returnValue == null) {
+            try {
+                String input = scanner.nextLine();
+
+                switch(input) {
+                    case "bed and breakfast":
+                        returnValue = BoardType.BED_AND_BREAKFAST;
+                    case "half board":
+                        returnValue = BoardType.HALF_BOARD;
+                    case "accomodations" :
+                        returnValue = BoardType.ACCOMMODATIONS;
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Enter a valid type!");
+            }
+        }
+        return returnValue;
+    }
+
+    public static RoomType returnRoomTypeInput(String message) {
+        System.out.println(message);
+        Scanner scanner = new Scanner(System.in);
+        RoomType returnValue = null;
+
+        while (returnValue == null) {
+            try {
+                String input = scanner.nextLine();
+
+                switch(input) {
+                    case "single":
+                        returnValue = RoomType.SINGLE;
+                    case "double":
+                        returnValue = RoomType.DOUBLE;
+                    case "2x double" :
+                        returnValue = RoomType.DOUBLE_2;
+                    case "penthouse" :
+                        returnValue = RoomType.PENTHOUSE;
+                }
+            }
+            catch (Exception e) {
                 System.out.println("Enter a valid type!");
             }
         }

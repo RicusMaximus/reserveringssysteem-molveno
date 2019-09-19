@@ -1,5 +1,5 @@
 package com.hotel.reservationsystem.models;
-import com.hotel.reservationsystem.controllers.UserInputController;
+
 import com.hotel.reservationsystem.enums.RoomType;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ public class Room
     private int price;
     private int maxAdults;
     private int maxChildren;
-    private String bedAmount;
+    private String bedAmount; //TODO amount???
     private RoomType roomType;
     private boolean disabledFriendly;
     private boolean available;
@@ -116,5 +116,30 @@ public class Room
 
     public void setAvailable(boolean availability) {
         this.available = availability;
+    }
+
+    public static ArrayList<Room> getAvailableRooms () {
+        // TECHNICAL DEBT - Should retrieve from database
+        // List of Room objects
+        ArrayList<Room> rooms = new ArrayList<>();
+        rooms.add(new Room(1, 2, 0, "Double",
+                RoomType.DOUBLE, true, true));
+        rooms.add(new Room(2, 2, 1, "Single",
+                RoomType.DOUBLE_2, false, true));
+        rooms.add(new Room(3, 2, 0,"2x Double",
+                RoomType.PENTHOUSE, true, false));
+        rooms.add(new Room(4, 2, 5, "Penthouse",
+                RoomType.SINGLE, false, false));
+        rooms.add(new Room(5, 2, 4, "200",
+                RoomType.SINGLE, false, true));
+
+        ArrayList<Room> availableRooms = new ArrayList<>();
+
+        for (Room room : rooms) {
+            if (room.isAvailable()) {
+                availableRooms.add(room);
+            }
+        }
+        return availableRooms;
     }
 }

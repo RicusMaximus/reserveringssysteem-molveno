@@ -1,21 +1,34 @@
 package com.hotel.reservationsystem.controllers;
 
+import com.hotel.reservationsystem.Main;
 import com.hotel.reservationsystem.enums.RoomType;
+import com.hotel.reservationsystem.models.Reservation;
 import com.hotel.reservationsystem.models.Room;
+import com.hotel.reservationsystem.views.RoomView;
 
 import java.util.ArrayList;
 
 public class RoomController {
-    private Room model;
+    private static ArrayList<Room> rooms;
 
-    public RoomController(Room model) {
-        this.model = model;
+    private static RoomController instance = null;
+
+    private RoomController(){
+        this.rooms = Main.retrieveRoomData();
     }
 
-    public static ArrayList<Room> getAvailableRooms (ArrayList<Room> rooms) {
+    public static RoomController getInstance() {
+        if (instance == null) {
+            instance = new RoomController();
+        }
+        return instance;
+    }
+
+    //TODO: Get rooms from Database
+    public ArrayList<Room> getAllAvailableRooms() {
         ArrayList<Room> availableRooms = new ArrayList<>();
 
-        for (Room room : rooms) {
+        for (Room room : this.rooms) {
             if (room.isAvailable()) {
                 availableRooms.add(room);
             }
@@ -23,58 +36,25 @@ public class RoomController {
         return availableRooms;
     }
 
+    //TODO: Get rooms from Database
+    public ArrayList<Room> getAllRooms() {
+        ArrayList<Room> allRooms = new ArrayList<>();
+
+        for (Room room : this.rooms) {
+            allRooms.add(room);
+        }
+        return allRooms;
+    }
+
+    //TODO: Weghalen
     public static void showAvailableRooms(ArrayList<Room> rooms) {
         for (Room room : rooms) {
             System.out.println("Kamer " + room.getRoomNumber() + " is beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
         }
     }
 
-    public static void showAllRooms(ArrayList<Room> rooms) {
-        for (Room room : rooms) {
-            if(room.isAvailable()){
-                System.out.println("Kamer " + room.getRoomNumber() + " is beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
-            } else {
-                System.out.println("Kamer " + room.getRoomNumber() + " is niet beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
-            }
-        }
-    }
-
-    private RoomType getBoardTypeInput() {
-        String input = UserInputController.returnStringInput("Enter a valid Room Type").toLowerCase();
-        RoomType type = null;
-
-        switch (input) {
-            case "single":
-                type = RoomType.SINGLE;
-                break;
-            case "double":
-                type = RoomType.DOUBLE;
-                break;
-            case "2x double":
-                type = RoomType.DOUBLE_2;
-                break;
-            case "penthouse":
-                type = RoomType.PENTHOUSE;
-                break;
-            default:
-                System.out.println("Please enter a valid room type.");
-                getBoardTypeInput();
-                break;
-        }
-        return type;
-    }
-
-    public void AddRoom(ArrayList<Room> room) {
-        int roomNumber = UserInputController.returnIntInput("\nEnter a valid Room Number:");
-        int maxAdults = UserInputController.returnIntInput("\nEnter a valid maximum adults value:");
-        int maxChildren = UserInputController.returnIntInput("\nEnter a valid maximum children value:");
-        String bedAmount = UserInputController.returnStringInput("\nEnter a valid bed type/amount:");
-        RoomType roomType = getBoardTypeInput();
-        boolean disabledFriendly = UserInputController.returnBoolInput("\nDisabled friendly yes/no?");
-        boolean available = UserInputController.returnBoolInput("\nRoom currently available yes/no?");
-
-        room.add(new Room(roomNumber, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
-
-        System.out.println(room.get(room.size() - 1));
+    //TODO: Wegschrijven in database
+    public static void createRoom(int roomNumber, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean available) {
+        rooms.add(new Room(roomNumber, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
     }
 }

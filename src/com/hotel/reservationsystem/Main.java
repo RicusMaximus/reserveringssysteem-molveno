@@ -1,9 +1,13 @@
 package com.hotel.reservationsystem;
+
 import com.hotel.reservationsystem.controllers.RoomController;
+import com.hotel.reservationsystem.controllers.ReservationController;
 import com.hotel.reservationsystem.enums.RoomType;
+import com.hotel.reservationsystem.models.ConfirmationMessage;
 import com.hotel.reservationsystem.models.Customer;
 import com.hotel.reservationsystem.models.Reservation;
 import com.hotel.reservationsystem.models.Room;
+import com.hotel.reservationsystem.views.RoomView;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -11,7 +15,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-        Reservation reservation = new Reservation();
+        ConfirmationMessage confirmationMessage = new ConfirmationMessage();
+        confirmationMessage.printToFile();
+
+        ReservationController resController = ReservationController.getInstance();
+
+        RoomView resView = new RoomView();
+        Reservation res = new Reservation();
         Customer customer = new Customer();
         Room room = new Room();
 
@@ -19,8 +29,9 @@ public class Main {
 
 
         while(true) {
-            System.out.println("\nType '1' to list all available rooms, Type '2' to list all rooms, Type '3' to add a new room, " +
-                            "type '4' to make a reservation, Type '5' to show all reservations.");
+            System.out.println("\nTyp '1' to list all available rooms.\nTyp '2' to list all rooms." +
+                    "\nTyp '3' to add a new room.\nTyp '4' to make a reservation.\nTyp '5' to show all reservations." +
+                    "\nTyp '6' to get reservations from file. \nTyp '6' to check-in or check-out.\nTyp 7 for a list of checked-out rooms.");
 
             Scanner scanner = new Scanner(System.in);
             int userInput = Integer.parseInt(scanner.nextLine());
@@ -28,22 +39,31 @@ public class Main {
             switch (userInput) {
                 //List all available rooms
                 case 1:
-                    RoomController.showAvailableRooms();
+                    RoomView.showAllAvailableRooms();
                     break;
                 //List all rooms
                 case 2:
-                    RoomController.showAllRooms(retrieveRoomData());
+                    RoomView.showAllRooms();
                     break;
                 //Add a new room
                 case 3:
-                    RoomController model = new RoomController(room);
-                    model.AddRoom(retrieveRoomData());
+                    RoomView.addNewRoomByInput();
                     break;
                 case 4:
-                    //reservations.add(reservation.createReservation(customer));
+                    reservations.add(reservation.createReservation(customer));
                     break;
                 case 5:
-                    //Reservation.showReservations(reservations);
+                    resView.showReservationNumberList();
+                    resView.showReservationByInput();
+                    break;
+                case 6:
+                    resController.getReservationsFromFile();
+                    break;
+                case 7:
+                    Reservation.checking(reservations);
+                    break;
+                case 8:
+                    Reservation.showCheckedOut(reservations);
                     break;
                 default:
                     System.out.println("Enter a valid input option!");
