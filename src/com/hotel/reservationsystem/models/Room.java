@@ -80,6 +80,10 @@ public class Room
         this.bedAmount = bedAmount;
     }
 
+    public RoomType getRawRoomType() {
+        return roomType; //TODO refactor this please
+    }
+
     public String getRoomType() {
         switch(roomType){
             case SINGLE:

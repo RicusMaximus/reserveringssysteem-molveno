@@ -22,7 +22,7 @@ public class ConfirmationMessage {
         rooms.add(new Room(1,2, 0, "Double",
                 RoomType.DOUBLE, true, true));
         rooms.add(new Room(2, 2, 2, "Double", RoomType.DOUBLE, true, true));
-        res = new Reservation(1, rooms, startDate, endDate , customer, boardtype);
+        res = new Reservation(1, rooms, startDate, endDate , customer, boardtype, true );
     }
 
     public void printToFile(){

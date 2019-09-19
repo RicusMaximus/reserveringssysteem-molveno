@@ -1,5 +1,7 @@
 package com.hotel.reservationsystem.models;
 import com.hotel.reservationsystem.enums.BoardType;
+import com.hotel.reservationsystem.enums.RoomType;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,10 +18,11 @@ public class Reservation {
     private BoardType boardType;
     private ArrayList<Room> rooms;
     private boolean checking;
+    private boolean babyBed;
 
     public Reservation(){ }
 
-    public Reservation(int reservationNumber, ArrayList<Room> rooms, Date startDate, Date endDate, Customer customer, BoardType boardType) {
+    public Reservation(int reservationNumber, ArrayList<Room> rooms, Date startDate, Date endDate, Customer customer, BoardType boardType, boolean babyBed) {
         this.reservationNumber = reservationNumber;
         this.rooms = rooms;
         this.startDate = startDate;
@@ -27,6 +30,7 @@ public class Reservation {
         this.customer = customer;
         this.boardType = boardType;
         this.reservationDate = new Date();
+        this.babyBed = babyBed;
     }
 
     public int getReservationNumber() {
@@ -130,11 +134,13 @@ public class Reservation {
         Room.showAvailableRooms();
         rooms = getRoomsInput();
 
-        return new Reservation(reservationNum, rooms, startDate, endDate, customer, boardType);
+        return new Reservation(reservationNum, rooms, startDate, endDate, customer, boardType, true);
     }
 
     private ArrayList<Room> getRoomsInput() {
         ArrayList<Room> availableRooms = Room.getAvailableRooms();
+
+
         ArrayList<Room> enteredRooms = new ArrayList<>();
         String input = null;
         while (true) {
@@ -327,4 +333,102 @@ public class Reservation {
     public void setChecking(boolean checking) {
         this.checking = checking;
     }
+
+    public void makeReservationAsCustomer() throws ParseException{
+        System.out.println("Please fill in your check-in date: ");
+        startDate = getDateInput();
+
+        System.out.println("Please fill in your check-out date: ");
+        endDate = getDateInput();
+
+        System.out.println("How many adults will be staying at Molveno?: ");
+        int adultAmount = getIntInput();
+
+        System.out.println("How many children will be staying at Molveno?: ");
+        int childrenAmount = getIntInput();
+
+        if (childrenAmount >0) {
+            babyBed = UserInput.returnBoolInput("Do you need a baby bed for your child(ren)?: ");
+        } else {
+            babyBed = false;
+        }
+
+        System.out.println("Please enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
+        boardType = getBoardTypeInput();
+
+        System.out.println("Please choose the room you'd like to reserve. These are available for you: ");
+        int amountTotal = adultAmount + childrenAmount;
+        for (int i = 0; i < amountTotal; i++) {
+            Room.getAvailableRooms();
+            int roomChoice = getIntInput();
+
+            for (Room room : Room.getAvailableRooms()) {
+                if(room.getRoomNumber() == roomChoice) {
+                    System.out.println("Hoeveel personen gaan er in deze kamer?"); //TODO
+                    int guestAmount = getIntInput();
+
+                    if(guestAmount > room.getRawRoomType().maxGuests) {
+                        System.out.println("ff een normale kamer kiezen aub");
+                    } else {
+                        amountTotal = amountTotal - guestAmount;
+                        rooms.add(room);
+                    }
+                } else {
+                    System.out.println("Dit is geen kamer vriend"); //TODO
+                }
+            }
+        }
+
+        System.out.println("First name main booker :");
+        customer.setFirstName(getStringInput());
+
+        System.out.println("Last name main booker");
+        customer.setLastName(getStringInput());
+
+        System.out.println("Address main booker");
+        customer.setAddress(getStringInput());
+
+        System.out.println("City of residence main booker");
+        customer.setCity(getStringInput());
+
+        System.out.println("Phone number main booker");
+        customer.setPhoneNumber(getStringInput());
+
+        System.out.println("Email main booker");
+        customer.setEmail(getStringInput());
+
+        System.out.println("Date of birth main booker (dd/mm/yyyy)");
+        customer.setBirthday(getDateInput());
+
+        new Reservation(1, rooms, startDate, endDate, null, BoardType.HALF_BOARD, true);
+    }
 }
+
+
+
+
+
+
+// Check-in date:
+// Check-out date:
+// Amount of adults:
+// Amount of children:
+// Need babybed: yes/no
+// Board type:
+// Choose rooms:
+
+// Name main booker:
+// Address main booker:
+// City of residence:
+// Phone number:
+// Email of main booker:
+// Date of birth main booker:
+
+// Name guest 1:
+// Birthday guest 1:
+
+
+
+
+
+

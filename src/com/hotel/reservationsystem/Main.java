@@ -38,8 +38,8 @@ public class Main {
 
 
         System.out.println("\nType '1' to list all available rooms.\nType '2' to list all rooms." +
-                "\nType '3' to add a new room.\nType '4' to make a reservation.\nType '5' to show all reservations." +
-                "\nType '6' to get reservations from file. \nType '7' to check-in or check-out.\nType '8' for a list of checked-out rooms.");
+                "\nType '3' to add a new room.\nType '4' to make a reservation as an employee.\nType '5' to show all reservations." +
+                "\nType '6' to get reservations from file. \nType '7' to check-in or check-out.\nType '8' for a list of checked-out rooms.\nType '9' to make a reservation as a guest.");
 
         while(true) {
 
@@ -50,8 +50,8 @@ public class Main {
             switch (userInput) {
                 case 0:
                     System.out.println("\nType '1' to list all available rooms.\nType '2' to list all rooms." +
-                            "\nType '3' to add a new room.\nType '4' to make a reservation.\nType '5' to show all reservations." +
-                            "\nType '6' to get reservations from file. \nType '7' to check-in or check-out.\nType '8' for a list of checked-out rooms.");
+                            "\nType '3' to add a new room.\nType '4' to make a reservation as an employee.\nType '5' to show all reservations." +
+                            "\nType '6' to get reservations from file. \nType '7' to check-in or check-out.\nType '8' for a list of checked-out rooms.\nType '9' to make a reservation as a guest.");
                     break;
                 //List all available rooms
                 case 1:
@@ -93,6 +93,10 @@ public class Main {
                     Reservation.showCheckedOut(reservations);
                     System.out.println("\nPress '0' to return to the menu.");
                     break;
+                case 9:
+                    Reservation reservation = new Reservation();
+                    reservation.makeReservationAsCustomer();
+                    System.out.println("\nPress '0' to return to the menu.");
                 default:
                     System.out.println("Enter a valid input option!");
                     break;

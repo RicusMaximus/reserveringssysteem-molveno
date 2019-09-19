@@ -32,7 +32,7 @@ public class ReservationController {
     public void createReservation (ArrayList<Room> rooms, Date startDate, Date endDate,
                                    Customer customer, BoardType boardType) {
         reservationNumberCounter++;
-        new Reservation(reservationNumberCounter, rooms, startDate, endDate, customer, boardType);
+        new Reservation(reservationNumberCounter, rooms, startDate, endDate, customer, boardType, true);
         // save to db
         // update view
     }
@@ -60,8 +60,8 @@ public class ReservationController {
         Date date = new Date();
         Customer cust = new Customer();
         BoardType brd = BoardType.BED_AND_BREAKFAST;
-        ress.add(new Reservation(1, rooms, date, date, cust, brd));
-        ress.add(new Reservation(2, rooms, date, date, cust, brd));
+        ress.add(new Reservation(1, rooms, date, date, cust, brd, true));
+        ress.add(new Reservation(2, rooms, date, date, cust, brd, true));
         return ress; // TODO Actually get from file ( ͡° ͜ʖ ͡°)
     }
 
