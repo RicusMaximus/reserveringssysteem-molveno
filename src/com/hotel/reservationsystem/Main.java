@@ -19,9 +19,6 @@ public class Main {
         ReservationController resController = ReservationController.getInstance();
         ReservationView resView = new ReservationView();
 
-        Reservation res = new Reservation();
-
-        Customer customer = new Customer();
         ArrayList<Reservation> reservations = new ArrayList<>();
 
         ArrayList<Room> rooms = new ArrayList<>();
@@ -63,14 +60,15 @@ public class Main {
                     room.AddRoom(rooms);
                     break;
                 case 4:
-                    reservations.add(res.createReservation(customer));
+                    //reservations.add(res.createReservation(customer));
+                    resView.addNewReservationByInput();
                     break;
                 case 5:
                     resView.showReservationNumberList();
                     resView.getReservationByInput();
                     break;
                 case 6:
-                    resController.getReservationsFromFile();
+                    resController.getReservationListFromDatabase();
                     break;
                 case 7:
                     Reservation.checking(reservations);

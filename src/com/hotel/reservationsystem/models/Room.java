@@ -152,12 +152,13 @@ public class Room
         //boolean completeRoom = false;
 
         //Room dingen
-        int roomNumber = UserInput.returnIntInput("\nEnter a valid Room Number:");
+        int roomNumber = UserInput.returnIntInput("\nEnter a valid Room Number:"); // TODO Check for validity
         int maxAdults = UserInput.returnIntInput("\nEnter a valid maximum adults value:");
         int maxChildren = UserInput.returnIntInput("\nEnter a valid maximum children value:");
         String bedAmount = UserInput.returnStringInput("\nEnter a valid bed type/amount:");
         RoomType roomType = RoomType.SINGLE; //komt nog
-        boolean disabledFriendly = UserInput.returnBoolInput("\nDisabled friendly yes/no?");
+        //boolean disabledFriendly = UserInput.returnBoolInput("\nDisabled friendly yes/no?");
+        boolean disabledFriendly = false;
         boolean available = UserInput.returnBoolInput("\nRoom currently available yes/no?");
 
         room.add(new Room(roomNumber, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
