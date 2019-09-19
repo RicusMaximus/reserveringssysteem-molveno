@@ -28,22 +28,17 @@ public class ConfirmationMessage {
     public void printToFile(){
         PrintWriter writer = null;
         try {
-            writer = new PrintWriter("textfile.txt");
+            writer = new PrintWriter("Confirmation_resnum_"+ res.getReservationNumber() + ".txt");
             writer.println("Your reservation with reservation number: " + res.getReservationNumber() + ", has been confirmed. See details below.");
             writer.println("Reservation number: " + res.getReservationNumber());
 
-            // save room list in variable
-            // create empty string for all room numbers
-            // loop over room list
-            // for every room in list, add room number to text
-            // write string with all room numbers to file
-
             rooms = res.getRooms();
-
             String roomText = "";
-                for(Room room : rooms) {
-                    roomText += room.getRoomNumber() + ", ";
+            for(Room room : rooms) {
+                // for every room in list, add room number to text for better overview in cli
+                roomText += room.getRoomNumber() + ", ";
             }
+            // write string with all room numbers to file
             writer.println("Rooms: " + roomText.substring(0, roomText.length() - 2));
             writer.println("Check-in date: " + res.getStartDate());
             writer.println("Check-out date: " + res.getEndDate());
