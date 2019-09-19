@@ -1,6 +1,5 @@
 package com.hotel.reservationsystem.models;
 import com.hotel.reservationsystem.enums.BoardType;
-import com.hotel.reservationsystem.enums.RoomType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -336,10 +335,10 @@ public class Reservation {
 
     public void makeReservationAsCustomer() throws ParseException{
         System.out.println("Please fill in your check-in date: ");
-        startDate = getDateInput();
+        Date startDate = getDateInput();
 
         System.out.println("Please fill in your check-out date: ");
-        endDate = getDateInput();
+        Date endDate = getDateInput();
 
         System.out.println("How many adults will be staying at Molveno?: ");
         int adultAmount = getIntInput();
@@ -347,37 +346,45 @@ public class Reservation {
         System.out.println("How many children will be staying at Molveno?: ");
         int childrenAmount = getIntInput();
 
-        if (childrenAmount >0) {
+        boolean babyBed = false;
+        if (childrenAmount > 0) {
             babyBed = UserInput.returnBoolInput("Do you need a baby bed for your child(ren)?: ");
         } else {
             babyBed = false;
         }
 
         System.out.println("Please enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
-        boardType = getBoardTypeInput();
+        BoardType boardType = getBoardTypeInput();
 
-        System.out.println("Please choose the room you'd like to reserve. These are available for you: ");
+        System.out.println("Please choose the room you'd like to reserve. These rooms are available for you: ");
         int amountTotal = adultAmount + childrenAmount;
+
+        ArrayList<Room> listToAdd = new ArrayList<>();
+
         for (int i = 0; i < amountTotal; i++) {
-            Room.getAvailableRooms();
+            Room.showAvailableRooms();
             int roomChoice = getIntInput();
+            Room selectedRoom = new Room();
 
-            for (Room room : Room.getAvailableRooms()) {
+            for(Room room : Room.getAvailableRooms()){
                 if(room.getRoomNumber() == roomChoice) {
-                    System.out.println("Hoeveel personen gaan er in deze kamer?"); //TODO
-                    int guestAmount = getIntInput();
-
-                    if(guestAmount > room.getRawRoomType().maxGuests) {
-                        System.out.println("ff een normale kamer kiezen aub");
-                    } else {
-                        amountTotal = amountTotal - guestAmount;
-                        rooms.add(room);
-                    }
-                } else {
-                    System.out.println("Dit is geen kamer vriend"); //TODO
+                    selectedRoom = room;
                 }
             }
+
+            System.out.println("How many guests will stay in this room?"); //TODO
+            int guestAmount = getIntInput();
+
+            if(guestAmount > selectedRoom.getRawRoomType().maxGuests) {
+                System.out.println("This type of room cannot hold this much guests. Please choose another room.");
+            } else {
+                amountTotal = amountTotal - guestAmount;
+                System.out.println(selectedRoom.getRoomNumber());
+                listToAdd.add(selectedRoom);
+            }
         }
+
+        Customer customer = new Customer();
 
         System.out.println("First name main booker :");
         customer.setFirstName(getStringInput());
@@ -400,32 +407,10 @@ public class Reservation {
         System.out.println("Date of birth main booker (dd/mm/yyyy)");
         customer.setBirthday(getDateInput());
 
-        new Reservation(1, rooms, startDate, endDate, null, BoardType.HALF_BOARD, true);
+        Reservation reservation = new Reservation(1, listToAdd, startDate, endDate, customer, boardType, babyBed);
+        System.out.println(reservation.getRooms());
     }
 }
-
-
-
-
-
-
-// Check-in date:
-// Check-out date:
-// Amount of adults:
-// Amount of children:
-// Need babybed: yes/no
-// Board type:
-// Choose rooms:
-
-// Name main booker:
-// Address main booker:
-// City of residence:
-// Phone number:
-// Email of main booker:
-// Date of birth main booker:
-
-// Name guest 1:
-// Birthday guest 1:
 
 
 

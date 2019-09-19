@@ -148,11 +148,12 @@ public class Room
         ArrayList<Room> rooms = getAvailableRooms();
         String input = null;
         for (Room room : rooms) {
-            System.out.println(room.roomNumber + " is available. This room is a " + room.getRoomType() + ".");
+            if (room.isAvailable()) {
+                System.out.println("Room " + room.roomNumber + " is available. This room is a " + room.getRoomType() + " and can hold "
+                + room.getRawRoomType().maxGuests + " guests.");
+            }
+        }
     }
-
-    }
-
 
     public void AddRoom(ArrayList<Room> room) {
         //boolean completeRoom = false;

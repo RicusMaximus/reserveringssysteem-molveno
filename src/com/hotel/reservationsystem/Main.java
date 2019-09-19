@@ -94,8 +94,7 @@ public class Main {
                     System.out.println("\nPress '0' to return to the menu.");
                     break;
                 case 9:
-                    Reservation reservation = new Reservation();
-                    reservation.makeReservationAsCustomer();
+                    res.makeReservationAsCustomer();
                     System.out.println("\nPress '0' to return to the menu.");
                 default:
                     System.out.println("Enter a valid input option!");
