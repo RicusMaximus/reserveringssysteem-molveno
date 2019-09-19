@@ -14,9 +14,7 @@ public class Main {
     public static void main(String[] args) throws ParseException {
         ReservationController resController = ReservationController.getInstance();
         ReservationView resView = new ReservationView();
-        Reservation res = new Reservation();
 
-        Customer customer = new Customer();
         ArrayList<Reservation> reservations = new ArrayList<>();
 
         ArrayList<Room> rooms = new ArrayList<>();
@@ -58,14 +56,15 @@ public class Main {
                     room.AddRoom(rooms);
                     break;
                 case 4:
-                    reservations.add(res.createReservation(customer));
+                    //reservations.add(res.createReservation(customer));
+                    resView.addNewReservationByInput();
                     break;
                 case 5:
                     resView.showReservationNumberList();
                     resView.getReservationByInput();
                     break;
                 case 6:
-                    resController.getReservationList();
+                    resController.getReservationListFromDatabase();
                     break;
                 case 7:
                     Reservation.checking(reservations);

@@ -14,14 +14,13 @@ import java.util.Date;
  *
  */
 public class ReservationView {
-    ReservationController reservationController = ReservationController.getInstance();
 
     /**
      *
      */
     public void showReservationNumberList () {
         // Get all reservations from controller
-        ArrayList<Reservation> reservations = reservationController.getReservations();
+        ArrayList<Reservation> reservations = ReservationController.getInstance().getReservations();
 
         // Loop over list and show reservation numbers
         String message = "";
@@ -37,13 +36,17 @@ public class ReservationView {
         System.out.println(message + "\n");
     }
 
+    public void updateView(String message) {
+        System.out.println(message);
+    }
+
     /**
      *
      */
     public void getReservationByInput () {
         // Wait for input to show detail info or quit
         int input = UserInput.returnIntInput("Voer het reserveringsnummer in voor meer informatie");
-        showReservationInformation(reservationController.getReservationByNumber(input));
+        showReservationInformation(ReservationController.getInstance().getReservationByNumber(input));
     }
 
     /**
@@ -51,10 +54,10 @@ public class ReservationView {
      */
     public void addNewReservationByInput() {
         // Let the user know what's happening
-        System.out.println("The ");
+        System.out.println("===================\nLet's create a reservation!\n");
 
-        Date startDate               = UserInput.returnDateInput("Enter the check-in date (dd/mm/yyyy): ");
-        Date endDate                 = UserInput.returnDateInput("Enter the check-out date (dd/mm/yyyy): ");
+        Date startDate          = UserInput.returnDateInput("Enter the check-in date (dd/mm/yyyy): ");
+        Date endDate            = UserInput.returnDateInput("Enter the check-out date (dd/mm/yyyy): ");
 
         Customer customer = new Customer(); // TODO Check for existing customer (Ask user if customer is new)
         customer.firstName      = UserInput.returnStringInput("Enter the first name of the main booker");
@@ -70,9 +73,9 @@ public class ReservationView {
 
         System.out.println("Which rooms do you want to reserve? The following are available:\n");
         Room.showAvailableRooms();
-        ArrayList<Room> rooms = getRoomsFromInput();
+        ArrayList<Room> rooms   = getRoomsFromInput();
 
-        reservationController.createReservation(rooms,startDate, endDate, null, boardType);
+        ReservationController.getInstance().createReservation(rooms,startDate, endDate, customer, boardType);
     }
 
     private BoardType getBoardTypeFromInput(String input) {
@@ -105,6 +108,7 @@ public class ReservationView {
         ArrayList<Room> enteredRooms = new ArrayList<>();
         String input = null;
         while (true) {
+            boolean validRoomNumberInput = true;
             boolean roomAdded = false;
             input = UserInput.returnStringInput("");
             if ( !input.matches("[0-9]+") ) { // TODO
@@ -117,19 +121,21 @@ public class ReservationView {
                 roomNumber = Integer.parseInt(input); // Create parse error throw
             } catch (NumberFormatException nfe) {
                 System.out.println("Please enter a valid room number or return to the menu with 's'.");
-                break;
+                validRoomNumberInput = false;
             }
-            for (int i = 0; i < availableRooms.size(); i++) {
-                if (roomNumber == availableRooms.get(i).getRoomNumber()) {
-                    enteredRooms.add(availableRooms.get(i));
-                    roomAdded = true;
-                    System.out.println("Room number " + availableRooms.get(i).getRoomNumber() + " is added to your reservation. " +
-                            "Press 's' to go back to the main menu.");
-                    break;
+            if (validRoomNumberInput) {
+                for (int i = 0; i < availableRooms.size(); i++) {
+                    if (roomNumber == availableRooms.get(i).getRoomNumber()) {
+                        enteredRooms.add(availableRooms.get(i));
+                        roomAdded = true;
+                        System.out.println("Room number " + availableRooms.get(i).getRoomNumber() + " is added to your reservation. " +
+                                "Press 's' to continue.");
+                        break;
+                    }
                 }
-            }
-            if (!roomAdded) {
-                System.out.println("Please enter the room number of an available room.");
+                if (!roomAdded) {
+                    System.out.println("Please enter the room number of an available room.");
+                }
             }
         }
         return enteredRooms;

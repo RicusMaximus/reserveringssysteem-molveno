@@ -101,7 +101,7 @@ public class Reservation {
 
 
 
-    public static void checking(ArrayList<Reservation> reservations){
+    public static void checking(ArrayList<Reservation> reservations){ // TODO Place in ReservationController, this is a wrong implementation of MVC
         String message = "";
         if (!reservations.isEmpty()) {
             for (Reservation res : reservations) {

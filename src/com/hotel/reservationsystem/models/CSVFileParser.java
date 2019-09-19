@@ -11,20 +11,20 @@ import java.util.Date;
 
 public class CSVFileParser extends FileParser {
 
-    private ReservationController reservationController = ReservationController.getInstance();
+    private ReservationController reservationController;
 
     @Override
     public ArrayList<Reservation> parseFile(String filePath) {
         ArrayList<Reservation> reservations = null;
-        String line;
-        String cvsSplitBy = ",";
+        String line, csvSplitSymbol = ",";
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
             while ((line = br.readLine()) != null) {
 
+                //System.out.println(line);
                 // use comma as separator
-                String[] reservationData = line.split(cvsSplitBy);
+                String[] reservationData = line.split(csvSplitSymbol);
 
                 // Parse room numbers to ArrayList<Room> rooms
 
