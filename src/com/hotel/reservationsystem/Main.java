@@ -1,12 +1,13 @@
 package com.hotel.reservationsystem;
 
-import com.hotel.reservationsystem.controllers.RoomController;
 import com.hotel.reservationsystem.controllers.ReservationController;
+import com.hotel.reservationsystem.controllers.RoomController;
 import com.hotel.reservationsystem.enums.RoomType;
 import com.hotel.reservationsystem.models.ConfirmationMessage;
 import com.hotel.reservationsystem.models.Customer;
 import com.hotel.reservationsystem.models.Reservation;
 import com.hotel.reservationsystem.models.Room;
+import com.hotel.reservationsystem.views.ReservationView;
 import com.hotel.reservationsystem.views.RoomView;
 
 import java.text.ParseException;
@@ -20,8 +21,10 @@ public class Main {
 
         ReservationController resController = ReservationController.getInstance();
 
-        RoomView resView = new RoomView();
-        Reservation res = new Reservation();
+        RoomView roomView = new RoomView();
+        ReservationView reservationView = new ReservationView();
+
+        Reservation reservation = new Reservation();
         Customer customer = new Customer();
         Room room = new Room();
 
@@ -53,8 +56,8 @@ public class Main {
                     reservations.add(reservation.createReservation(customer));
                     break;
                 case 5:
-                    resView.showReservationNumberList();
-                    resView.showReservationByInput();
+                    reservationView.showReservationNumberList();
+                    reservationView.showReservationByInput();
                     break;
                 case 6:
                     resController.getReservationsFromFile();
