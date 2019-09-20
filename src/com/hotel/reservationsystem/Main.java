@@ -19,9 +19,6 @@ public class Main {
         ReservationController resController = ReservationController.getInstance();
         ReservationView resView = new ReservationView();
 
-        Reservation res = new Reservation();
-
-        Customer customer = new Customer();
         ArrayList<Reservation> reservations = new ArrayList<>();
 
         ArrayList<Room> rooms = new ArrayList<>();
@@ -42,7 +39,6 @@ public class Main {
                 "\nType '6' to get reservations from file. \nType '7' to check-in or check-out.\nType '8' for a list of checked-out rooms.\nType '9' to make a reservation as a guest.");
 
         while(true) {
-
             Scanner scanner = new Scanner(System.in);
 
             int userInput = Integer.parseInt(scanner.nextLine());
@@ -73,8 +69,10 @@ public class Main {
                     System.out.println("\nPress '0' to return to the menu.");
                     break;
                 case 4:
-                    reservations.add(res.createReservation(customer));
+                    resView.addNewReservationByInput();
                     System.out.println("\nPress '0' to return to the menu.");
+
+                    //reservations.add(res.createReservation(customer));
                     break;
                 case 5:
                     resView.showReservationNumberList();
@@ -82,7 +80,7 @@ public class Main {
                     System.out.println("\nPress '0' to return to the menu.");
                     break;
                 case 6:
-                    resController.getReservationsFromFile();
+                    resController.getReservationListFromDatabase();
                     System.out.println("\nPress '0' to return to the menu.");
                     break;
                 case 7:
@@ -94,12 +92,12 @@ public class Main {
                     System.out.println("\nPress '0' to return to the menu.");
                     break;
                 case 9:
+                    Reservation res = new Reservation();
                     res.makeReservationAsCustomer();
                     System.out.println("\nPress '0' to return to the menu.");
                 default:
                     System.out.println("Enter a valid input option!");
                     break;
-
             }
         }
     }

@@ -19,7 +19,7 @@ public class Reservation {
     private boolean checking;
     private boolean babyBed;
 
-    public Reservation(){ }
+    public Reservation(){}
 
     public Reservation(int reservationNumber, ArrayList<Room> rooms, Date startDate, Date endDate, Customer customer, BoardType boardType, boolean babyBed) {
         this.reservationNumber = reservationNumber;
@@ -126,8 +126,7 @@ public class Reservation {
         System.out.println("Add the date of birth of the main booker (dd/mm/yyyy)");
         customer.setBirthday(getDateInput());
 
-        System.out.println("Enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
-        boardType = getBoardTypeInput();
+        boardType = getBoardTypeInput("Enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
 
         System.out.println("Which rooms do you want to reserve? These are available:\n");
         Room.showAvailableRooms();
@@ -175,7 +174,8 @@ public class Reservation {
         return enteredRooms;
     }
 
-    private BoardType getBoardTypeInput() {
+    private BoardType getBoardTypeInput(String message) {
+        System.out.println(message);
         String input = getStringInput().toLowerCase();
         BoardType type = null;
 
@@ -190,8 +190,7 @@ public class Reservation {
                 type = BoardType.ACCOMMODATIONS;
                 break;
             default:
-                System.out.println("Please enter a valid board type.");
-                getBoardTypeInput();
+                getBoardTypeInput(message);
                 break;
         }
         return type;
@@ -213,7 +212,7 @@ public class Reservation {
         return new SimpleDateFormat("dd/MM/yyyy").parse(input);
     }
 
-    public static void showReservations (ArrayList<Reservation> reservations) {
+    public static void checking(ArrayList<Reservation> reservations){ // TODO Place in ReservationController, this is a wrong implementation of MVC
         String message = "";
         if (!reservations.isEmpty()) {
             for (Reservation res : reservations) {
@@ -224,59 +223,24 @@ public class Reservation {
         }
         System.out.println(message.substring(0, message.length() - 2) + "\n");
         while (true) {
-            System.out.println("Enter a reservation number to view details. Enter 's' to exit.");
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
-            //if ( !input.matches("[0-9]+") ) { // TODO
+            String input = UserInput.returnStringInput("Enter a reservation number to view details. Enter 's' to exit.");
+            if ( !input.matches("\\d+") ) { // TODO
                 if (input.equals("s")) {
                     break;
                 }
-            //}
+            }
             int reservationNumber = 0;
             try {
                 reservationNumber = Integer.parseInt(input); // Create parse error throw
             } catch (NumberFormatException nfe) {
-                System.out.println("Please enter a valid entry.");
+                System.out.println("Please enter a valid number.");
                 break;
             }
             for (int i = 0; i < reservations.size(); i++) {
                 if (reservationNumber == reservations.get(i).reservationNumber) {
-                    reservations.get(i).showReservationInfo();
-                    break;
-                }
-            }
-        }
-    }
-    public static void checking(ArrayList<Reservation> reservations){
-        String message = "";
-        if (!reservations.isEmpty()) {
-            for (Reservation res : reservations) {
-                message = res.reservationNumber + ", "; // TODO Accomodate for last item in list
-            }
-        } else {
-            message = "No reservations found.  ";
-        }
-        System.out.println(message.substring(0, message.length() - 2) + "\n");
-        while (true) {
-            System.out.println("Enter a reservation number to view details. Enter 's' to exit.");
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
-            //if ( !input.matches("[0-9]+") ) { // TODO
-            if (input.equals("s")) {
-                break;
-            }
-            //}
-            int reservationNumber = 0;
-            try {
-                reservationNumber = Integer.parseInt(input); // Create parse error throw
-            } catch (NumberFormatException nfe) {
-                System.out.println("Please enter a valid entry.");
-                break;
-            }
-            for (int i = 0; i < reservations.size(); i++) {
-                if (reservationNumber == reservations.get(i).reservationNumber) {
+
                     System.out.println("Type '1' to check-in and typ '2' to check-out.");
-                    int input2 = scanner.nextInt();
+                    int input2 = UserInput.returnIntInput("Type '1' to check-in and typ '2' to check-out.");
 
                     switch (input2){
                         case 1:
@@ -333,35 +297,26 @@ public class Reservation {
         this.checking = checking;
     }
 
-    public void makeReservationAsCustomer() throws ParseException{
-        System.out.println("Please fill in your check-in date: ");
-        Date startDate = getDateInput();
+    public void makeReservationAsCustomer() throws ParseException {
+        Date startDate = UserInput.returnDateInput("Please fill in your check-in date: ");
+        Date endDate = UserInput.returnDateInput("Please fill in your check-out date: ");
+        int adultAmount = UserInput.returnIntInput("How many adults will be staying at Molveno?: ");
+        int childrenAmount = UserInput.returnIntInput("How many children will be staying at Molveno?: ");
+        int totalAmount = adultAmount + childrenAmount;
 
-        System.out.println("Please fill in your check-out date: ");
-        Date endDate = getDateInput();
-
-        System.out.println("How many adults will be staying at Molveno?: ");
-        int adultAmount = getIntInput();
-
-        System.out.println("How many children will be staying at Molveno?: ");
-        int childrenAmount = getIntInput();
-
-        boolean babyBed = false;
+        boolean babyBed;
         if (childrenAmount > 0) {
             babyBed = UserInput.returnBoolInput("Do you need a baby bed for your child(ren)?: ");
         } else {
             babyBed = false;
         }
 
-        System.out.println("Please enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
-        BoardType boardType = getBoardTypeInput();
+        BoardType boardType = getBoardTypeInput("Please enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
 
         System.out.println("Please choose the room you'd like to reserve. These rooms are available for you: ");
-        int amountTotal = adultAmount + childrenAmount;
 
-        ArrayList<Room> listToAdd = new ArrayList<>();
-
-        for (int i = 0; i < amountTotal; i++) {
+        ArrayList<Room> roomList = new ArrayList<>();
+        for (int i = 0; i < totalAmount; i++) {
             Room.showAvailableRooms();
             int roomChoice = getIntInput();
             Room selectedRoom = new Room();
@@ -373,14 +328,16 @@ public class Reservation {
             }
 
             System.out.println("How many guests will stay in this room?"); //TODO
-            int guestAmount = getIntInput();
+            int guestAmountInput = getIntInput();
 
-            if(guestAmount > selectedRoom.getRawRoomType().maxGuests) {
+            if(guestAmountInput > selectedRoom.getRawRoomType().maxGuests) {
                 System.out.println("This type of room cannot hold this much guests. Please choose another room.");
+            } else if(guestAmountInput > totalAmount) {
+                System.out.println("This amount is higher than the amount of guests for this reservation!");
             } else {
-                amountTotal = amountTotal - guestAmount;
-                System.out.println(selectedRoom.getRoomNumber());
-                listToAdd.add(selectedRoom);
+                totalAmount = totalAmount - guestAmountInput;
+                System.out.println(selectedRoom.getRoomNumber()); //DEBUG code
+                roomList.add(selectedRoom);
             }
         }
 
@@ -407,7 +364,7 @@ public class Reservation {
         System.out.println("Date of birth main booker (dd/mm/yyyy)");
         customer.setBirthday(getDateInput());
 
-        Reservation reservation = new Reservation(1, listToAdd, startDate, endDate, customer, boardType, babyBed);
+        Reservation reservation = new Reservation(1, roomList, startDate, endDate, customer, boardType, babyBed);
         System.out.println(reservation.getRooms());
     }
 }
