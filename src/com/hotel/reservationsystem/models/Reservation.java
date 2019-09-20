@@ -341,28 +341,14 @@ public class Reservation {
             }
         }
 
-        Customer customer = new Customer();
-
-        System.out.println("First name main booker :");
-        customer.setFirstName(getStringInput());
-
-        System.out.println("Last name main booker");
-        customer.setLastName(getStringInput());
-
-        System.out.println("Address main booker");
-        customer.setAddress(getStringInput());
-
-        System.out.println("City of residence main booker");
-        customer.setCity(getStringInput());
-
-        System.out.println("Phone number main booker");
-        customer.setPhoneNumber(getStringInput());
-
-        System.out.println("Email main booker");
-        customer.setEmail(getStringInput());
-
-        System.out.println("Date of birth main booker (dd/mm/yyyy)");
-        customer.setBirthday(getDateInput());
+        Customer customer = new Customer(); // TODO Check for existing customer (Ask user if customer is new)
+        customer.setFirstName(UserInput.returnStringInput("Enter the first name of the main booker"));
+        customer.setLastName(UserInput.returnStringInput("Enter the last name of the main booker"));
+        customer.setAddress(UserInput.returnStringInput("Enter the address of the main booker"));
+        customer.setCity(UserInput.returnStringInput("Enter the city of residence of the main booker"));
+        customer.setPhoneNumber(UserInput.returnStringInput("Add the phone number of the main booker")); // TODO Add international phone number regex
+        customer.setEmail(UserInput.returnStringInput("Add the email of the main booker")); // TODO add email regex
+        customer.setBirthday(UserInput.returnDateInput("Add the date of birth of the main booker (dd/mm/yyyy)"));
 
         Reservation reservation = new Reservation(1, roomList, startDate, endDate, customer, boardType, babyBed);
         System.out.println(reservation.getRooms());
