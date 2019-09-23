@@ -37,9 +37,9 @@ public class Main {
                 RoomType.SINGLE, false, true));
 
         while(true) {
-            System.out.println("\nTyp '1' to list all available rooms.\nTyp '2' to list all rooms." +
-                    "\nTyp '3' to add a new room.\nTyp '4' to make a reservation.\nTyp '5' to show all reservations." +
-                    "\nTyp '6' to get reservations from file. \nTyp '6' to check-in or check-out.\nTyp 7 for a list of checked-out rooms.");
+            System.out.println("\nType '1' to list all available rooms.\nType '2' to list all rooms." +
+                    "\nType '3' to add a new room.\nType '4' to make a reservation.\nType '5' to show all reservations." +
+                    "\nType '6' to check-in or check-out.\nType '7' for a list of checked-out rooms.");
 
             Scanner scanner = new Scanner(System.in);
 
@@ -70,12 +70,9 @@ public class Main {
                     resView.getReservationByInput();
                     break;
                 case 6:
-                    resController.getReservationsFromFile();
-                    break;
-                case 7:
                     Reservation.checking(reservations);
                     break;
-                case 8:
+                case 7:
                     Reservation.showCheckedOut(reservations);
                     break;
                 default:
