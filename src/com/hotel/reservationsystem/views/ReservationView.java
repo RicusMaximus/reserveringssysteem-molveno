@@ -1,6 +1,5 @@
 package com.hotel.reservationsystem.views;
 
-import com.hotel.reservationsystem.Main;
 import com.hotel.reservationsystem.controllers.ReservationController;
 import com.hotel.reservationsystem.enums.BoardType;
 import com.hotel.reservationsystem.models.Customer;
@@ -15,10 +14,8 @@ import java.util.Date;
 
 public class ReservationView {
     public void showReservationNumberList () {
-        // Get all reservations from controller
-        ArrayList<Reservation> reservations = ReservationController.getInstance().getReservations();
+        ArrayList<Reservation> reservations = ReservationController.getInstance().getAllReservations();
 
-        // Loop over list and show reservation numbers
         String message = "";
         if (!reservations.isEmpty()) {
             for (Reservation res : reservations) {
@@ -61,24 +58,18 @@ public class ReservationView {
         customer.setEmail(UserInput.returnStringInput("Add the email of the main booker")); // TODO add email regex
         customer.setBirthday(UserInput.returnDateInput("Add the date of birth of the main booker (dd/mm/yyyy)"));
 
-
-        String boardTypeInput   = UserInput.returnStringInput("Enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
-        BoardType boardType     = getBoardTypeFromInput(boardTypeInput);
+        String boardTypeInput = UserInput.returnStringInput("Enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
+        BoardType boardType = getBoardTypeFromInput(boardTypeInput);
 
         System.out.println("Which rooms do you want to reserve? The following are available:\n");
-        Room.showAvailableRooms();
-        ArrayList<Room> rooms   = getRoomsFromInput();
+        RoomView.showAllAvailableRooms();
+        ArrayList<Room> rooms = getRoomsFromInput();
 
         ReservationController.getInstance().createReservation(rooms, startDate, endDate, customer, boardType);
     }
 
     private BoardType getBoardTypeFromInput(String input) {
         BoardType type = null;
-
-        System.out.println("Which rooms do you want to reserve? These are available:\n");
-        RoomController.showAvailableRooms(Main.retrieveRoomData());
-        //rooms = getRoomsInput(); TODO Use UserInput method
-
 
         switch (input.toLowerCase()) {
             case "bed and breakfast":
@@ -103,7 +94,7 @@ public class ReservationView {
     }
 
     private ArrayList<Room> getRoomsFromInput() {
-        ArrayList<Room> availableRooms = Room.getAvailableRooms(); // TODO Use RoomController to get Rooms
+        ArrayList<Room> availableRooms = RoomController.getInstance().getAllAvailableRooms(); // TODO Use RoomController to get Rooms
         ArrayList<Room> enteredRooms = new ArrayList<>();
         String input = null;
         while (true) {

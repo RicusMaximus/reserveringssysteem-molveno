@@ -118,11 +118,9 @@ public class Room
         this.available = availability;
     }
 
-    public static ArrayList<Room> getAvailableRooms () {
-        // TECHNICAL DEBT - Should retrieve from database
-        // List of Room objects
+    public static ArrayList<Room> retrieveRoomData() {
         ArrayList<Room> rooms = new ArrayList<>();
-        rooms.add(new Room(1, 2, 0, "Double",
+        rooms.add(new Room(1,2, 0, "Double",
                 RoomType.DOUBLE, true, true));
         rooms.add(new Room(2, 2, 1, "Single",
                 RoomType.DOUBLE_2, false, true));
@@ -133,20 +131,6 @@ public class Room
         rooms.add(new Room(5, 2, 4, "200",
                 RoomType.SINGLE, false, true));
 
-        ArrayList<Room> availableRooms = new ArrayList<>();
-
-        for (Room room : rooms) {
-            if (room.isAvailable()) {
-                availableRooms.add(room);
-            }
-        }
-        return availableRooms;
-    }
-
-    public static void showAvailableRooms() {
-        ArrayList<Room> rooms = getAvailableRooms();
-        for (Room room : rooms) {
-            System.out.println(room.roomNumber + " ");
-        }
+        return rooms;
     }
 }

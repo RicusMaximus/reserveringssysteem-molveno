@@ -1,12 +1,9 @@
 package com.hotel.reservationsystem.models;
 
-import com.hotel.reservationsystem.Main;
 import com.hotel.reservationsystem.controllers.RoomController;
-import com.hotel.reservationsystem.controllers.UserInputController;
 import com.hotel.reservationsystem.enums.BoardType;
+import com.hotel.reservationsystem.enums.RoomType;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -98,41 +95,12 @@ public class Reservation {
         this.rooms = rooms;
     }
 
-    private ArrayList<Room> getRoomsInput() {
-        ArrayList<Room> availableRooms = RoomController.getInstance().getAllAvailableRooms(); //TODO fixen naar roomcontroller call
-        ArrayList<Room> enteredRooms = new ArrayList<>();
-        String input = null;
-        while (true) {
-            boolean roomAdded = false;
-            Scanner scanner = new Scanner(System.in);
-            input = scanner.nextLine();
-            if ( !input.matches("[0-9]+") ) { // TODO
-                if (input.equals("s")) {
-                    break;
-                }
-            }
-            int roomNumber = 0;
-            try {
-                roomNumber = Integer.parseInt(input); // Create parse error throw
-            } catch (NumberFormatException nfe) {
-                System.out.println("Please enter a valid input.");
-                break;
-            }
-            for (int i = 0; i < availableRooms.size(); i++) {
-                if (roomNumber == availableRooms.get(i).getRoomNumber()) {
-                    enteredRooms.add(availableRooms.get(i));
-                    roomAdded = true;
-                    System.out.println("Room number " + availableRooms.get(i).getRoomNumber() + " is added to your reservation. " +
-                            "Press 's' to go back to the main menu.");
-                    break;
-                }
-            }
-            if (!roomAdded) {
-                System.out.println("Please enter the room number of an available room.");
-            }
+    public boolean isChecking() {
+        return checking;
+    }
 
-        }
-        return enteredRooms;
+    public void setChecking(boolean checking) {
+        this.checking = checking;
     }
 
     public static void checking(ArrayList<Reservation> reservations){
@@ -191,11 +159,24 @@ public class Reservation {
         }
     }
 
-    public boolean isChecking() {
-        return checking;
-    }
+        public static ArrayList<Reservation> retrieveReservationData() {
+        ArrayList<Room> rooms = new ArrayList<>();
+        rooms.add(new Room(1,2, 0, "Double",
+                RoomType.DOUBLE, true, true));
+        rooms.add(new Room(2, 2, 1, "Single",
+                RoomType.DOUBLE_2, false, true));
+        rooms.add(new Room(3, 2, 0,"2x Double",
+                RoomType.PENTHOUSE, true, false));
+        rooms.add(new Room(4, 2, 5, "Penthouse",
+                RoomType.SINGLE, false, false));
+        rooms.add(new Room(5, 2, 4, "200",
+                RoomType.SINGLE, false, true));
 
-    public void setChecking(boolean checking) {
-        this.checking = checking;
+        ArrayList<Reservation> ress = new ArrayList<>();
+        Date date = new Date();
+        Customer cust = new Customer();
+        BoardType brd = BoardType.BED_AND_BREAKFAST;
+        ress.add(new Reservation(1, rooms, date, date, cust, brd));
+        return ress; // TODO Actually get from file ( ͡° ͜ʖ ͡°)
     }
 }

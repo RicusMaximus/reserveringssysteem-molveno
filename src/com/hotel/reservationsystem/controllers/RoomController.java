@@ -1,10 +1,7 @@
 package com.hotel.reservationsystem.controllers;
 
-import com.hotel.reservationsystem.Main;
 import com.hotel.reservationsystem.enums.RoomType;
-import com.hotel.reservationsystem.models.Reservation;
 import com.hotel.reservationsystem.models.Room;
-import com.hotel.reservationsystem.views.RoomView;
 
 import java.util.ArrayList;
 
@@ -14,7 +11,7 @@ public class RoomController {
     private static RoomController instance = null;
 
     private RoomController(){
-        this.rooms = Main.retrieveRoomData();
+        this.rooms = Room.retrieveRoomData();
     }
 
     public static RoomController getInstance() {
@@ -22,18 +19,6 @@ public class RoomController {
             instance = new RoomController();
         }
         return instance;
-    }
-
-    //TODO: Get rooms from Database
-    public ArrayList<Room> getAllAvailableRooms() {
-        ArrayList<Room> availableRooms = new ArrayList<>();
-
-        for (Room room : this.rooms) {
-            if (room.isAvailable()) {
-                availableRooms.add(room);
-            }
-        }
-        return availableRooms;
     }
 
     //TODO: Get rooms from Database
@@ -46,11 +31,16 @@ public class RoomController {
         return allRooms;
     }
 
-    //TODO: Weghalen
-    public static void showAvailableRooms(ArrayList<Room> rooms) {
-        for (Room room : rooms) {
-            System.out.println("Kamer " + room.getRoomNumber() + " is beschikbaar. Deze kamer is een " + room.getRoomType() + ".");
+    //TODO: Get rooms from Database
+    public ArrayList<Room> getAllAvailableRooms() {
+        ArrayList<Room> availableRooms = new ArrayList<>();
+
+        for (Room room : this.rooms) {
+            if (room.isAvailable()) {
+                availableRooms.add(room);
+            }
         }
+        return availableRooms;
     }
 
     //TODO: Wegschrijven in database

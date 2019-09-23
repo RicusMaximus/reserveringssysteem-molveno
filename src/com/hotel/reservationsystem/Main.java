@@ -22,7 +22,6 @@ public class Main {
         ReservationView reservationView = new ReservationView();
 
         RoomView roomView = new RoomView();
-
         Reservation reservation = new Reservation();
         Customer customer = new Customer();
         Room room = new Room();
@@ -59,7 +58,7 @@ public class Main {
                     reservationView.showReservationByInput();
                     break;
                 case 6:
-                    reservationController.getReservationListFromDatabase();
+                    reservationController.getAllReservations();
                     break;
                 case 7:
                     Reservation.checking(reservations);
@@ -72,21 +71,5 @@ public class Main {
                     break;
             }
         }
-    }
-
-    public static ArrayList<Room> retrieveRoomData() {
-        ArrayList<Room> rooms = new ArrayList<>();
-        rooms.add(new Room(1,2, 0, "Double",
-                RoomType.DOUBLE, true, true));
-        rooms.add(new Room(2, 2, 1, "Single",
-                RoomType.DOUBLE_2, false, true));
-        rooms.add(new Room(3, 2, 0,"2x Double",
-                RoomType.PENTHOUSE, true, false));
-        rooms.add(new Room(4, 2, 5, "Penthouse",
-                RoomType.SINGLE, false, false));
-        rooms.add(new Room(5, 2, 4, "200",
-                RoomType.SINGLE, false, true));
-
-        return rooms;
     }
 }
