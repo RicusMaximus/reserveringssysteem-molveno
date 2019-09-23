@@ -4,17 +4,18 @@ import com.hotel.reservationsystem.enums.BoardType;
 import com.hotel.reservationsystem.enums.RoomType;
 import com.hotel.reservationsystem.models.*;
 import com.hotel.reservationsystem.views.ReservationView;
+import com.hotel.reservationsystem.views.RoomView;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- */
 public class ReservationController {
     private ArrayList<Reservation> reservations;
+
     private ReservationView view;
     private int reservationNumberCounter = 1;
+
+    private ArrayList<RoomView> views;
 
     private static ReservationController instance = null;
 

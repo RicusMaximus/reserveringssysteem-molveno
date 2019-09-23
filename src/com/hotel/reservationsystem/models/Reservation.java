@@ -1,5 +1,10 @@
 package com.hotel.reservationsystem.models;
+
+import com.hotel.reservationsystem.Main;
+import com.hotel.reservationsystem.controllers.RoomController;
+import com.hotel.reservationsystem.controllers.UserInputController;
 import com.hotel.reservationsystem.enums.BoardType;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -93,7 +98,44 @@ public class Reservation {
         this.rooms = rooms;
     }
 
-    public static void checking(ArrayList<Reservation> reservations){ // TODO Place in ReservationController, this is a wrong implementation of MVC
+    private ArrayList<Room> getRoomsInput() {
+        ArrayList<Room> availableRooms = RoomController.getInstance().getAllAvailableRooms(); //TODO fixen naar roomcontroller call
+        ArrayList<Room> enteredRooms = new ArrayList<>();
+        String input = null;
+        while (true) {
+            boolean roomAdded = false;
+            Scanner scanner = new Scanner(System.in);
+            input = scanner.nextLine();
+            if ( !input.matches("[0-9]+") ) { // TODO
+                if (input.equals("s")) {
+                    break;
+                }
+            }
+            int roomNumber = 0;
+            try {
+                roomNumber = Integer.parseInt(input); // Create parse error throw
+            } catch (NumberFormatException nfe) {
+                System.out.println("Please enter a valid input.");
+                break;
+            }
+            for (int i = 0; i < availableRooms.size(); i++) {
+                if (roomNumber == availableRooms.get(i).getRoomNumber()) {
+                    enteredRooms.add(availableRooms.get(i));
+                    roomAdded = true;
+                    System.out.println("Room number " + availableRooms.get(i).getRoomNumber() + " is added to your reservation. " +
+                            "Press 's' to go back to the main menu.");
+                    break;
+                }
+            }
+            if (!roomAdded) {
+                System.out.println("Please enter the room number of an available room.");
+            }
+
+        }
+        return enteredRooms;
+    }
+
+    public static void checking(ArrayList<Reservation> reservations){
         String message = "";
         if (!reservations.isEmpty()) {
             for (Reservation res : reservations) {
@@ -104,11 +146,12 @@ public class Reservation {
         }
         System.out.println(message.substring(0, message.length() - 2) + "\n");
         while (true) {
-            String input = UserInput.returnStringInput("Enter a reservation number to view details. Enter 's' to exit.");
-            if ( !input.matches("\\d+") ) { // TODO
-                if (input.equals("s")) {
-                    break;
-                }
+            System.out.println("Enter a reservation number to view details. Enter 's' to exit.");
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
+            //if ( !input.matches("[0-9]+") ) { // TODO
+            if (input.equals("s")) {
+                break;
             }
             int reservationNumber = 0;
             try {

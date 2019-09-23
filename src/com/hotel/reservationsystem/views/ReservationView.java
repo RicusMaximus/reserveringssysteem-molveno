@@ -1,8 +1,11 @@
 package com.hotel.reservationsystem.views;
 
+import com.hotel.reservationsystem.Main;
 import com.hotel.reservationsystem.controllers.ReservationController;
 import com.hotel.reservationsystem.enums.BoardType;
 import com.hotel.reservationsystem.models.Customer;
+import com.hotel.reservationsystem.controllers.RoomController;
+import com.hotel.reservationsystem.controllers.UserInputController;
 import com.hotel.reservationsystem.models.Reservation;
 import com.hotel.reservationsystem.models.Room;
 import com.hotel.reservationsystem.models.UserInput;
@@ -10,14 +13,7 @@ import com.hotel.reservationsystem.models.UserInput;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- */
 public class ReservationView {
-
-    /**
-     *
-     */
     public void showReservationNumberList () {
         // Get all reservations from controller
         ArrayList<Reservation> reservations = ReservationController.getInstance().getReservations();
@@ -40,12 +36,9 @@ public class ReservationView {
         System.out.println(message);
     }
 
-    /**
-     *
-     */
-    public void getReservationByInput () {
+    public void showReservationByInput() {
         // Wait for input to show detail info or quit
-        int input = UserInput.returnIntInput("Voer het reserveringsnummer in voor meer informatie");
+        int input = UserInputController.returnIntInput("Voer het reserveringsnummer in voor meer informatie");
         showReservationInformation(ReservationController.getInstance().getReservationByNumber(input));
     }
 
@@ -68,6 +61,7 @@ public class ReservationView {
         customer.setEmail(UserInput.returnStringInput("Add the email of the main booker")); // TODO add email regex
         customer.setBirthday(UserInput.returnDateInput("Add the date of birth of the main booker (dd/mm/yyyy)"));
 
+
         String boardTypeInput   = UserInput.returnStringInput("Enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
         BoardType boardType     = getBoardTypeFromInput(boardTypeInput);
 
@@ -80,6 +74,11 @@ public class ReservationView {
 
     private BoardType getBoardTypeFromInput(String input) {
         BoardType type = null;
+
+        System.out.println("Which rooms do you want to reserve? These are available:\n");
+        RoomController.showAvailableRooms(Main.retrieveRoomData());
+        //rooms = getRoomsInput(); TODO Use UserInput method
+
 
         switch (input.toLowerCase()) {
             case "bed and breakfast":
