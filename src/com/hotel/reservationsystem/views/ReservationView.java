@@ -56,17 +56,17 @@ public class ReservationView {
         // Let the user know what's happening
         System.out.println("===================\nLet's create a reservation!\n");
 
-        Date startDate          = UserInput.returnDateInput("Enter the check-in date (dd/mm/yyyy): ");
-        Date endDate            = UserInput.returnDateInput("Enter the check-out date (dd/mm/yyyy): ");
+        Date startDate = UserInput.returnDateInput("Enter the check-in date (dd/mm/yyyy): ");
+        Date endDate = UserInput.returnDateInput("Enter the check-out date (dd/mm/yyyy): ");
 
         Customer customer = new Customer(); // TODO Check for existing customer (Ask user if customer is new)
-        customer.firstName      = UserInput.returnStringInput("Enter the first name of the main booker");
-        customer.lastName       = UserInput.returnStringInput("Enter the last name of the main booker");
-        customer.address        = UserInput.returnStringInput("Enter the address of the main booker");
-        customer.city           = UserInput.returnStringInput("Enter the city of residence of the main booker");
-        customer.phoneNumber    = UserInput.returnStringInput("Add the phone number of the main booker"); // TODO Add international phone number regex
-        customer.email          = UserInput.returnStringInput("Add the email of the main booker"); // TODO add email regex
-        customer.birthday       = UserInput.returnDateInput("Add the date of birth of the main booker (dd/mm/yyyy)");
+        customer.setFirstName(UserInput.returnStringInput("Enter the first name of the main booker"));
+        customer.setLastName(UserInput.returnStringInput("Enter the last name of the main booker"));
+        customer.setAddress(UserInput.returnStringInput("Enter the address of the main booker"));
+        //customer.city           = UserInput.returnStringInput("Enter the city of residence of the main booker");
+        customer.setPhoneNumber(UserInput.returnStringInput("Add the phone number of the main booker"));
+        customer.setEmail(UserInput.returnStringInput("Add the email of the main booker")); // TODO add email regex
+        customer.setBirthday(UserInput.returnDateInput("Add the date of birth of the main booker (dd/mm/yyyy)"));
 
         String boardTypeInput   = UserInput.returnStringInput("Enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
         BoardType boardType     = getBoardTypeFromInput(boardTypeInput);
@@ -75,7 +75,7 @@ public class ReservationView {
         Room.showAvailableRooms();
         ArrayList<Room> rooms   = getRoomsFromInput();
 
-        ReservationController.getInstance().createReservation(rooms,startDate, endDate, customer, boardType);
+        ReservationController.getInstance().createReservation(rooms, startDate, endDate, customer, boardType);
     }
 
     private BoardType getBoardTypeFromInput(String input) {
