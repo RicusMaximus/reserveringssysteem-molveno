@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class RoomController {
     private static ArrayList<Room> rooms;
-
     private static RoomController instance = null;
 
     private RoomController(){

@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ReservationView {
+    private static ReservationController reservationController = ReservationController.getInstance();
+
     public void showReservationNumberList () {
-        ArrayList<Reservation> reservations = ReservationController.getInstance().getAllReservations();
+        ArrayList<Reservation> reservations = reservationController.getInstance().getAllReservations();
 
         String message = "";
         if (!reservations.isEmpty()) {
@@ -27,10 +29,6 @@ public class ReservationView {
         // Remove trailing comma from message
         if (message.contains(",")) message = message.substring(0, message.length() - 2);
         System.out.println(message + "\n");
-    }
-
-    public void updateView(String message) {
-        System.out.println(message);
     }
 
     public void showReservationByInput() {
