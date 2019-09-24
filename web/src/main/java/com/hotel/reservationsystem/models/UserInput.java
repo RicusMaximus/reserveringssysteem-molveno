@@ -1,4 +1,6 @@
 package com.hotel.reservationsystem.models;
+import com.hotel.reservationsystem.enums.BoardType;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -66,5 +68,31 @@ public class UserInput {
             }
         }
         return returnValue;
+    }
+
+    public static BoardType returnBoardType (String message) {
+        BoardType type = null;
+        System.out.println(message);
+        Scanner scanner = new Scanner(System.in);
+
+        switch (scanner.nextLine().toLowerCase()) {
+            case "bed and breakfast":
+            case "bnb":
+                type = BoardType.BED_AND_BREAKFAST;
+                break;
+            case "half board":
+            case "half":
+                type = BoardType.HALF_BOARD;
+                break;
+            case "accommodations":
+            case "acc":
+                type = BoardType.ACCOMMODATIONS;
+                break;
+            default:
+                System.out.println("Please enter a valid board type.");
+                returnBoardType(message);
+                break;
+        }
+        return type;
     }
 }

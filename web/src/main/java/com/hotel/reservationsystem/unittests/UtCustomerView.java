@@ -1,4 +1,4 @@
-package com.hotel.reservationsystem.unittest;
+package com.hotel.reservationsystem.unittests;
 
 public class UtCustomerView {
 }

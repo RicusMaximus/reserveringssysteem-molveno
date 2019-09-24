@@ -48,16 +48,10 @@ public class ReservationView {
         Date endDate = UserInput.returnDateInput("Enter the check-out date (dd/mm/yyyy): ");
 
         Customer customer = new Customer(); // TODO Check for existing customer (Ask user if customer is new)
-        customer.setFirstName(UserInput.returnStringInput("Enter the first name of the main booker"));
-        customer.setLastName(UserInput.returnStringInput("Enter the last name of the main booker"));
-        customer.setAddress(UserInput.returnStringInput("Enter the address of the main booker"));
-        //customer.city           = UserInput.returnStringInput("Enter the city of residence of the main booker");
-        customer.setPhoneNumber(UserInput.returnStringInput("Add the phone number of the main booker"));
-        customer.setEmail(UserInput.returnStringInput("Add the email of the main booker")); // TODO add email regex
-        customer.setBirthday(UserInput.returnDateInput("Add the date of birth of the main booker (dd/mm/yyyy)"));
+        enterCustomerData(customer);
 
-        String boardTypeInput = UserInput.returnStringInput("Enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
-        BoardType boardType = getBoardTypeFromInput(boardTypeInput);
+        //BoardType boardType = UserInput.returnBoardType("Enter the board type (Bed and Breakfast, Half Board, Accommodations): "); // TODO Legacy code
+        BoardType boardType = BoardType.ACCOMMODATIONS;
 
         System.out.println("Which rooms do you want to reserve? The following are available:\n");
         RoomView.showAllAvailableRooms();
@@ -66,29 +60,14 @@ public class ReservationView {
         ReservationController.getInstance().createReservation(rooms, startDate, endDate, customer, boardType);
     }
 
-    private BoardType getBoardTypeFromInput(String input) {
-        BoardType type = null;
-
-        switch (input.toLowerCase()) {
-            case "bed and breakfast":
-            case "bnb":
-                type = BoardType.BED_AND_BREAKFAST;
-                break;
-            case "half board":
-            case "half-board":
-            case "half":
-                type = BoardType.HALF_BOARD;
-                break;
-            case "accommodations":
-            case "acc":
-                type = BoardType.ACCOMMODATIONS;
-                break;
-            default:
-                System.out.println("Please enter a valid board type.");
-                getBoardTypeFromInput(input);
-                break;
-        }
-        return type;
+    private void enterCustomerData(Customer customer) {
+        customer.setFirstName(UserInput.returnStringInput("Enter the first name of the main booker"));
+        customer.setLastName(UserInput.returnStringInput("Enter the last name of the main booker"));
+        customer.setAddress(UserInput.returnStringInput("Enter the address of the main booker"));
+        //customer.setCity(UserInput.returnStringInput("Enter the city of residence of the main booker"));
+        customer.setPhoneNumber(UserInput.returnStringInput("Add the phone number of the main booker"));
+        customer.setEmail(UserInput.returnStringInput("Add the email of the main booker")); // TODO add email regex
+        customer.setBirthday(UserInput.returnDateInput("Add the date of birth of the main booker (dd/mm/yyyy)"));
     }
 
     private ArrayList<Room> getRoomsFromInput() {
@@ -130,17 +109,17 @@ public class ReservationView {
     }
 
     public void showReservationInformation (Reservation reservation) {
-        System.out.println("Reserveringsnummer: " + reservation.getReservationNumber());
-        System.out.println("Reserveringsdatum: " + reservation.getReservationDate());
-        System.out.println("Datum van ingang: " + reservation.getStartDate());
-        System.out.println("Einddatum: " + reservation.getEndDate());
-        System.out.println("Totale kosten reservering: " + reservation.getTotalPrice());
-        System.out.println("Naam hoofdboeker: " + reservation.getCustomer().getFirstName() + " " + reservation.getCustomer().getLastName());
-        System.out.println("Verzorgingstype: " + reservation.getBoardType().getBoardType());
+        System.out.println("Reservation number: " + reservation.getReservationNumber());
+        System.out.println("Date of creation: " + reservation.getReservationDate());
+        System.out.println("Start date: " + reservation.getStartDate());
+        System.out.println("End date: " + reservation.getEndDate());
+        System.out.println("Total cost reservation: " + reservation.getTotalPrice());
+        System.out.println("Customer name: " + reservation.getCustomer().getFirstName() + " " + reservation.getCustomer().getLastName());
+        System.out.println("Board type: " + reservation.getBoardType().getBoardType());
         String kamers = "";
         for (Room room : reservation.getRooms()) {
             kamers += room.getRoomNumber() + ", ";
         }
-        System.out.println("Kamers: " + kamers.substring(0, kamers.length() - 2));
+        System.out.println("Rooms: " + kamers.substring(0, kamers.length() - 2));
     }
 }

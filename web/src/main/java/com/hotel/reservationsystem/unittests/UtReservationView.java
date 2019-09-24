@@ -1,9 +1,7 @@
-package com.hotel.reservationsystem.unittest;
+package com.hotel.reservationsystem.unittests;
 
 import com.hotel.reservationsystem.views.ReservationView;
-import com.hotel.reservationsystem.models.Reservation;
 import org.junit.*;
-import static org.junit.Assert.*;
 
 public class UtReservationView {
 
@@ -18,6 +16,6 @@ public class UtReservationView {
 
     // TODO Add tests
     @Test
-    public void showReservationInformationReservationRes (Reservation res) {
+    public void showReservationInformationReservationRes() {
     }
 }

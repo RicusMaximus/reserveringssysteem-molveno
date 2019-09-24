@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Date;
 
-
 /**
  * The REST API for Reservation CRUD
  */
@@ -46,16 +45,12 @@ public class ReservationController {
      */
     public void createReservation (ArrayList<Room> rooms, Date startDate, Date endDate,
                                    Customer customer, BoardType boardType) {
-
         reservationNumberCounter++; // TODO Make reservation number the Database index
         Reservation newReservation = new Reservation(reservationNumberCounter, rooms, startDate, endDate, customer, boardType);
-
         // save to db
         addReservationToDatabase(newReservation);
-
         // update view
         //view.updateView("Reservation " + newReservation.getReservationNumber() + " has been created.");
-
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
@@ -70,8 +65,7 @@ public class ReservationController {
             if (id == res.getReservationNumber()) {
                 return res;
             }
-        }
-        throw new NotFoundException();
+        } throw new NotFoundException();
     }
 
     /**
@@ -94,7 +88,6 @@ public class ReservationController {
     public ArrayList<Reservation> getReservationListFromDatabase () {
         // FileParser parser = new CSVFileParser(); // CSV implementation of abstract File Parser
         // return parser.parseFile("./reservations.csv");
-
         return getMockReservationList();
     }
 
@@ -122,7 +115,6 @@ public class ReservationController {
         return ress; // TODO Actually get from file ( ͡° ͜ʖ ͡°)
     }
 
-
     /**
      * Loop over reservation list and return a reservation with corresponding reservation number
      * @param reservationNumber The reservation number of the reservation you want to retrieve
@@ -136,4 +128,65 @@ public class ReservationController {
         }
         return null; // TODO Handle exceptions
     }
+
+    /**
+     * Get all checked out reservations
+     * @param reservations The list of reservations
+     * @return A list of checked out reservations
+     */
+    @RequestMapping(value = "/checkedout/get", method = RequestMethod.GET)
+    public ArrayList<Reservation> getCheckedOut(ArrayList<Reservation> reservations) {
+        ArrayList<Reservation> checkedOutReservations = new ArrayList<>();
+        for (Reservation res : reservations) {
+            if (!res.isCheckedIn()) {
+                checkedOutReservations.add(res);
+            }
+        }
+        return checkedOutReservations;
+    }
+    /*public static void checking(ArrayList<Reservation> reservations){
+        String message = "";
+        if (!reservations.isEmpty()) {
+            for (Reservation res : reservations) {
+                message = res.reservationNumber + ", "; // TODO Accomodate for last item in list
+            }
+        } else {
+            message = "No reservations found.  ";
+        }
+        System.out.println(message.substring(0, message.length() - 2) + "\n");
+        while (true) {
+            System.out.println("Enter a reservation number to view details. Enter 's' to exit.");
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
+            //if ( !input.matches("[0-9]+") ) { // TODO
+            if (input.equals("s")) {
+                break;
+            }
+            int reservationNumber = 0;
+            try {
+                reservationNumber = Integer.parseInt(input); // Create parse error throw
+            } catch (NumberFormatException nfe) {
+                System.out.println("Please enter a valid number.");
+                break;
+            }
+            for (int i = 0; i < reservations.size(); i++) {
+                if (reservationNumber == reservations.get(i).reservationNumber) {
+                    int input2 = UserInput.returnIntInput("Type '1' to check-in and typ '2' to check-out.");
+
+                    switch (input2){
+                        case 1:
+                            reservations.get(i).setChecking(true);
+                            System.out.println("This room is successfully checked-in");
+                            break;
+                        case 2:
+                            reservations.get(i).setChecking(false);
+                            System.out.println("This room is successfully checked-out.");
+                            break;
+                        default:
+                            System.out.println("Please typ a '1' for check-in or a '2' for check-out.");
+                    }
+                }
+            }
+        }
+    }*/
 }
