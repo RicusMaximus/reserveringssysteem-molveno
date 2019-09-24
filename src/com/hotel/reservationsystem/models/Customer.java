@@ -13,6 +13,8 @@ public class Customer {
     private String email;
     private Date birthday;
 
+    public Customer() {}
+
     public int getCustomerId() {
         return customerId;
     }

@@ -1,7 +1,9 @@
 package com.hotel.reservationsystem.models;
+
+import com.hotel.reservationsystem.controllers.RoomController;
 import com.hotel.reservationsystem.enums.BoardType;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import com.hotel.reservationsystem.enums.RoomType;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -93,7 +95,15 @@ public class Reservation {
         this.rooms = rooms;
     }
 
-    public static void checking(ArrayList<Reservation> reservations){ // TODO Place in ReservationController, this is a wrong implementation of MVC
+    public boolean isChecking() {
+        return checking;
+    }
+
+    public void setChecking(boolean checking) {
+        this.checking = checking;
+    }
+
+    public static void checking(ArrayList<Reservation> reservations){
         String message = "";
         if (!reservations.isEmpty()) {
             for (Reservation res : reservations) {
@@ -104,11 +114,12 @@ public class Reservation {
         }
         System.out.println(message.substring(0, message.length() - 2) + "\n");
         while (true) {
-            String input = UserInput.returnStringInput("Enter a reservation number to view details. Enter 's' to exit.");
-            if ( !input.matches("\\d+") ) { // TODO
-                if (input.equals("s")) {
-                    break;
-                }
+            System.out.println("Enter a reservation number to view details. Enter 's' to exit.");
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
+            //if ( !input.matches("[0-9]+") ) { // TODO
+            if (input.equals("s")) {
+                break;
             }
             int reservationNumber = 0;
             try {
@@ -148,11 +159,24 @@ public class Reservation {
         }
     }
 
-    public boolean isChecking() {
-        return checking;
-    }
+        public static ArrayList<Reservation> retrieveReservationData() {
+        ArrayList<Room> rooms = new ArrayList<>();
+        rooms.add(new Room(1,2, 0, "Double",
+                RoomType.DOUBLE, true, true));
+        rooms.add(new Room(2, 2, 1, "Single",
+                RoomType.DOUBLE_2, false, true));
+        rooms.add(new Room(3, 2, 0,"2x Double",
+                RoomType.PENTHOUSE, true, false));
+        rooms.add(new Room(4, 2, 5, "Penthouse",
+                RoomType.SINGLE, false, false));
+        rooms.add(new Room(5, 2, 4, "200",
+                RoomType.SINGLE, false, true));
 
-    public void setChecking(boolean checking) {
-        this.checking = checking;
+        ArrayList<Reservation> ress = new ArrayList<>();
+        Date date = new Date();
+        Customer cust = new Customer();
+        BoardType brd = BoardType.BED_AND_BREAKFAST;
+        ress.add(new Reservation(1, rooms, date, date, cust, brd));
+        return ress; // TODO Actually get from file ( ͡° ͜ʖ ͡°)
     }
 }

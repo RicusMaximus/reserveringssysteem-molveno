@@ -1,7 +1,7 @@
 Your reservation with reservation number: 1, has been confirmed. See details below.
 Reservation number: 1
 Rooms: 1, 2
-Check-in date: Wed Sep 18 14:21:28 CEST 2019
-Check-out date: Wed Sep 18 14:21:28 CEST 2019
+Check-in date: Mon Sep 23 16:24:56 CEST 2019
+Check-out date: Mon Sep 23 16:24:56 CEST 2019
 Guest name: null null
 Board type: HALF_BOARD
