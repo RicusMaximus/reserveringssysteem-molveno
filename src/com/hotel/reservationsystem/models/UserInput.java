@@ -2,6 +2,7 @@ package com.hotel.reservationsystem.models;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class UserInput {
@@ -15,7 +16,7 @@ public class UserInput {
         Scanner scanner = getInputValue(message);
         String returnValue = null;
 
-        while(returnValue == null){
+        while(returnValue == null || returnValue.matches("")){
             try {
                 returnValue = scanner.nextLine();
             } catch (Exception nfe) {

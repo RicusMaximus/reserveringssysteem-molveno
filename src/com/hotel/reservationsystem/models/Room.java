@@ -130,7 +130,6 @@ public class Room
                 RoomType.SINGLE, false, false));
         rooms.add(new Room(5, 2, 4, "200",
                 RoomType.SINGLE, false, true));
-
         return rooms;
     }
 }

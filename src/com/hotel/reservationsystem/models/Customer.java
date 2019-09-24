@@ -1,7 +1,10 @@
 package com.hotel.reservationsystem.models;
+import com.hotel.reservationsystem.exceptions.InvalidEmailException;
 import com.hotel.reservationsystem.enums.Title;
 
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Customer {
     private int customerId;
@@ -68,6 +71,12 @@ public class Customer {
     }
 
     public void setEmail(String email) {
+        String emailRegex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,12}$";;
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        if (!matcher.matches()) {
+            throw new InvalidEmailException("Invalid email, please enter a valid email format e.g. john.doe@gmail.com");
+        }
         this.email = email;
     }
 
