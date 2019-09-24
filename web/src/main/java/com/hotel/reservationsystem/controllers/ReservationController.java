@@ -55,8 +55,8 @@ public class ReservationController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String addNewReservation (@RequestBody Reservation newReservation) {
-        newReservation.getReservationNumber();
-        return "";
+        reservations.add(newReservation);
+        return "Successfully added new reservation";
     }
 
     @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
@@ -142,7 +142,7 @@ public class ReservationController {
                 checkedOutReservations.add(res);
             }
         }
-        return checkedOutReservations;
+        return checkedOutReservations; // TODO Maak een lijst van de kamers van de reserveringen, de reservering zelf is niet interessant voor Hoofd facilitair
     }
     /*public static void checking(ArrayList<Reservation> reservations){
         String message = "";
