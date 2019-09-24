@@ -18,7 +18,4 @@ public class CustomerController {
         }
         return instance;
     }
-
-
-
 }

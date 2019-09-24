@@ -1,5 +1,7 @@
 package com.hotel.reservationsystem.models;
+
 import com.hotel.reservationsystem.enums.RoomType;
+
 import java.util.ArrayList;
 
 public class Room
@@ -8,7 +10,7 @@ public class Room
     private int price;
     private int maxAdults;
     private int maxChildren;
-    private String bedAmount;
+    private String bedAmount; //TODO amount???
     private RoomType roomType;
     private boolean disabledFriendly;
     private boolean available;
@@ -26,6 +28,7 @@ public class Room
         this.available = available;
     }
 
+    //GETTERS and SETTERS
     public int getRoomNumber() {
         return roomNumber;
     }
@@ -115,11 +118,9 @@ public class Room
         this.available = availability;
     }
 
-    public static ArrayList<Room> getAvailableRooms () {
-        // TECHNICAL DEBT - Should retrieve from database
-        // List of Room objects
+    public static ArrayList<Room> retrieveRoomData() {
         ArrayList<Room> rooms = new ArrayList<>();
-        rooms.add(new Room(1, 2, 0, "Double",
+        rooms.add(new Room(1,2, 0, "Double",
                 RoomType.DOUBLE, true, true));
         rooms.add(new Room(2, 2, 1, "Single",
                 RoomType.DOUBLE_2, false, true));
@@ -130,39 +131,6 @@ public class Room
         rooms.add(new Room(5, 2, 4, "200",
                 RoomType.SINGLE, false, true));
 
-        ArrayList<Room> availableRooms = new ArrayList<>();
-
-        for (Room room : rooms) {
-            if (room.isAvailable()) {
-                availableRooms.add(room);
-            }
-        }
-        return availableRooms;
-    }
-
-    public static void showAvailableRooms() {
-        ArrayList<Room> rooms = getAvailableRooms();
-        for (Room room : rooms) {
-            System.out.println(room.roomNumber + " ");
-        }
-    }
-
-
-    public void AddRoom(ArrayList<Room> room) {
-        //boolean completeRoom = false;
-
-        //Room dingen
-        int roomNumber = UserInput.returnIntInput("\nEnter a valid Room Number:"); // TODO Check for validity
-        int maxAdults = UserInput.returnIntInput("\nEnter a valid maximum adults value:");
-        int maxChildren = UserInput.returnIntInput("\nEnter a valid maximum children value:");
-        String bedAmount = UserInput.returnStringInput("\nEnter a valid bed type/amount:");
-        RoomType roomType = RoomType.SINGLE; //komt nog
-        //boolean disabledFriendly = UserInput.returnBoolInput("\nDisabled friendly yes/no?");
-        boolean disabledFriendly = false;
-        boolean available = UserInput.returnBoolInput("\nRoom currently available yes/no?");
-
-        room.add(new Room(roomNumber, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
-
-        System.out.println(room.get(room.size() - 1));
+        return rooms;
     }
 }
