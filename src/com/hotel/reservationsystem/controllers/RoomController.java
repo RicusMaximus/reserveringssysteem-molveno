@@ -29,7 +29,7 @@ public class RoomController {
         }
         return allRooms;
     }
-
+    
     //TODO: Get rooms from Database
     public ArrayList<Room> getAllAvailableRooms() {
         ArrayList<Room> availableRooms = new ArrayList<>();
