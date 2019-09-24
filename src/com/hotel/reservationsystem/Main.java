@@ -36,7 +36,7 @@ public class Main {
         while(true) {
             System.out.println("\nTyp '1' to list all available rooms.\nTyp '2' to list all rooms." +
                     "\nTyp '3' to add a new room.\nTyp '4' to make a reservation.\nTyp '5' to show all reservations." +
-                    "\nTyp '6' to get reservations from file. \nTyp '6' to check-in or check-out.\nTyp 7 for a list of checked-out rooms.");
+                    "\nTyp '6' to get reservations from file. \nTyp '7' to check-in or check-out.\nTyp '8' for a list of checked-out rooms.");
 
             Scanner scanner = new Scanner(System.in);
 
