@@ -54,7 +54,7 @@ public class ReservationController {
         addReservationToDatabase(newReservation);
 
         // update view
-        view.updateView("Reservation " + newReservation.getReservationNumber() + " has been created.");
+        //view.updateView("Reservation " + newReservation.getReservationNumber() + " has been created.");
 
     }
 
@@ -74,20 +74,17 @@ public class ReservationController {
         throw new NotFoundException();
     }
 
-
-
-
-
-    private void addReservationToDatabase(Reservation newReservation) {
-        reservations.add(newReservation);
-    }
-
     /**
      * Get all reservations
      * @return The current complete list of reservations
      */
-    public ArrayList<Reservation> getReservations() {
+    @RequestMapping(value = "get", method = RequestMethod.GET)
+    public ArrayList<Reservation> getReservations () {
         return reservations;
+    }
+
+    private void addReservationToDatabase(Reservation newReservation) {
+        reservations.add(newReservation);
     }
 
     /**
@@ -105,7 +102,7 @@ public class ReservationController {
      * Retrieve a list of Reservations locally created instead of retrieving from database
      * @return Reservations
      */
-    private ArrayList<Reservation> getMockReservationList() {
+    public ArrayList<Reservation> getMockReservationList() {
         ArrayList<Room> rooms = new ArrayList<>();
         rooms.add(new Room(1,2, 0, "Double",
                 RoomType.DOUBLE, true, true));

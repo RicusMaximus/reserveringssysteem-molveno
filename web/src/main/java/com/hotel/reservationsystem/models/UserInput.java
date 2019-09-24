@@ -2,7 +2,6 @@ package com.hotel.reservationsystem.models;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class UserInput {
@@ -16,7 +15,7 @@ public class UserInput {
         Scanner scanner = getInputValue(message);
         String returnValue = null;
 
-        while(returnValue == null || returnValue.matches("")){
+        while(returnValue == null){
             try {
                 returnValue = scanner.nextLine();
             } catch (Exception nfe) {
@@ -55,18 +54,17 @@ public class UserInput {
     }
 
     public static boolean returnBoolInput (String message) {
-        throw new UnsupportedOperationException();
-//        System.out.println(message);
-//        Scanner scanner = new Scanner(System.in);
-//        boolean returnValue = false;
-//
-//        while (returnValue == false) {
-//            try {
-//                returnValue = Boolean.parseBoolean(scanner.nextLine());
-//            } catch (Exception nfe) {
-//                System.out.println("Enter a valid number!");
-//            }
-//        }
-//        return returnValue;
+        System.out.println(message);
+        Scanner scanner = new Scanner(System.in);
+        boolean returnValue = false;
+
+        while (returnValue == false) {
+            try {
+                returnValue = Boolean.parseBoolean(scanner.nextLine());
+            } catch (Exception nfe) {
+                System.out.println("Enter a valid number!");
+            }
+        }
+        return returnValue;
     }
 }

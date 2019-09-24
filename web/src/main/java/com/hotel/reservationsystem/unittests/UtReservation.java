@@ -1,4 +1,4 @@
-package com.hotel.reservationsystem.unittests;
+package com.hotel.reservationsystem.unittest;
 
 import com.hotel.reservationsystem.models.Reservation;
 import org.junit.*;

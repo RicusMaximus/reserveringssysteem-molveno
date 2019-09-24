@@ -3,6 +3,8 @@ package com.hotel.reservationsystem.views;
 import com.hotel.reservationsystem.controllers.ReservationController;
 import com.hotel.reservationsystem.enums.BoardType;
 import com.hotel.reservationsystem.models.Customer;
+import com.hotel.reservationsystem.controllers.RoomController;
+import com.hotel.reservationsystem.controllers.UserInputController;
 import com.hotel.reservationsystem.models.Reservation;
 import com.hotel.reservationsystem.models.Room;
 import com.hotel.reservationsystem.models.UserInput;
@@ -10,19 +12,12 @@ import com.hotel.reservationsystem.models.UserInput;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- */
 public class ReservationView {
+    private static ReservationController reservationController = ReservationController.getInstance();
 
-    /**
-     *
-     */
     public void showReservationNumberList () {
-        // Get all reservations from controller
-        ArrayList<Reservation> reservations = ReservationController.getInstance().getReservations();
+        ArrayList<Reservation> reservations = reservationController.getInstance().getMockReservationList();
 
-        // Loop over list and show reservation numbers
         String message = "";
         if (!reservations.isEmpty()) {
             for (Reservation res : reservations) {
@@ -36,16 +31,9 @@ public class ReservationView {
         System.out.println(message + "\n");
     }
 
-    public void updateView(String message) {
-        System.out.println(message);
-    }
-
-    /**
-     *
-     */
-    public void getReservationByInput () {
+    public void showReservationByInput() {
         // Wait for input to show detail info or quit
-        int input = UserInput.returnIntInput("Voer het reserveringsnummer in voor meer informatie");
+        int input = UserInputController.returnIntInput("Voer het reserveringsnummer in voor meer informatie");
         showReservationInformation(ReservationController.getInstance().getReservationByNumber(input));
     }
 
@@ -56,31 +44,26 @@ public class ReservationView {
         // Let the user know what's happening
         System.out.println("===================\nLet's create a reservation!\n");
 
-        Date startDate          = UserInput.returnDateInput("Enter the check-in date (dd/mm/yyyy): ");
-        Date endDate            = UserInput.returnDateInput("Enter the check-out date (dd/mm/yyyy): ");
+        Date startDate = UserInput.returnDateInput("Enter the check-in date (dd/mm/yyyy): ");
+        Date endDate = UserInput.returnDateInput("Enter the check-out date (dd/mm/yyyy): ");
 
         Customer customer = new Customer(); // TODO Check for existing customer (Ask user if customer is new)
-        enterCustomerData(customer);        // TODO USe CustomerController class
-
-        String boardTypeInput   = UserInput.returnStringInput("Enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
-        BoardType boardType     = getBoardTypeFromInput(boardTypeInput);
-
-        System.out.println("Which rooms do you want to reserve? The following are available:\n");
-        Room.showAvailableRooms();
-        ArrayList<Room> rooms   = getRoomsFromInput();
-
-        ReservationController.getInstance().createReservation(rooms,startDate, endDate, customer, boardType);
-    }
-
-    private void enterCustomerData(Customer customer) {
         customer.setFirstName(UserInput.returnStringInput("Enter the first name of the main booker"));
         customer.setLastName(UserInput.returnStringInput("Enter the last name of the main booker"));
         customer.setAddress(UserInput.returnStringInput("Enter the address of the main booker"));
-        customer.setPhoneNumber(UserInput.returnStringInput("Add the phone number of the main booker")); // TODO Add international phone number regex
-
+        //customer.city           = UserInput.returnStringInput("Enter the city of residence of the main booker");
+        customer.setPhoneNumber(UserInput.returnStringInput("Add the phone number of the main booker"));
         customer.setEmail(UserInput.returnStringInput("Add the email of the main booker")); // TODO add email regex
-
         customer.setBirthday(UserInput.returnDateInput("Add the date of birth of the main booker (dd/mm/yyyy)"));
+
+        String boardTypeInput = UserInput.returnStringInput("Enter the board type (Bed and Breakfast, Half Board, Accommodations): ");
+        BoardType boardType = getBoardTypeFromInput(boardTypeInput);
+
+        System.out.println("Which rooms do you want to reserve? The following are available:\n");
+        RoomView.showAllAvailableRooms();
+        ArrayList<Room> rooms = getRoomsFromInput();
+
+        ReservationController.getInstance().createReservation(rooms, startDate, endDate, customer, boardType);
     }
 
     private BoardType getBoardTypeFromInput(String input) {
@@ -109,7 +92,7 @@ public class ReservationView {
     }
 
     private ArrayList<Room> getRoomsFromInput() {
-        ArrayList<Room> availableRooms = Room.getAvailableRooms(); // TODO Use RoomController to get Rooms
+        ArrayList<Room> availableRooms = RoomController.getInstance().getAllAvailableRooms(); // TODO Use RoomController to get Rooms
         ArrayList<Room> enteredRooms = new ArrayList<>();
         String input = null;
         while (true) {
