@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class UtReservationController {
+public class UTReservationController {
 
     @Before
     public void reflectOnSingletonAndReset() throws NoSuchFieldException, IllegalAccessException {

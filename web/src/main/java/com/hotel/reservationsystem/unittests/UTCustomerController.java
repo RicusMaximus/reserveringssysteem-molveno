@@ -1,4 +1,4 @@
 package com.hotel.reservationsystem.unittest;
 
-public class UtCustomerController {
+public class UTCustomerController {
 }

@@ -18,7 +18,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class UtRoomService {
+public class UTRoomService {
     @Autowired
     RoomRepository roomRepository;
 
