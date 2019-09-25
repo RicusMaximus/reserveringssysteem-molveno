@@ -2,48 +2,35 @@ package com.hotel.reservationsystem.controllers;
 
 import com.hotel.reservationsystem.enums.RoomType;
 import com.hotel.reservationsystem.models.Room;
+import com.hotel.reservationsystem.services.RoomService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
+@RestController
+@RequestMapping("api/v1/room")
 public class RoomController {
-    private static ArrayList<Room> rooms;
-    private static RoomController instance = null;
 
-    private RoomController(){
-        this.rooms = Room.retrieveRoomData();
+    @Autowired
+    private RoomService roomService;
+
+    @GetMapping("/all")
+    public List<Room> getAllRooms(){
+        return this.roomService.getAllRooms();
     }
 
-    public static RoomController getInstance() {
-        if (instance == null) {
-            instance = new RoomController();
-        }
-        return instance;
+    @GetMapping("/available")
+    public List<Room> getAllAvailableRooms(){
+        return this.roomService.getAllAvailableRooms();
     }
 
-    //TODO: Get rooms from Database
-    public ArrayList<Room> getAllRooms() {
-        ArrayList<Room> allRooms = new ArrayList<>();
-
-        for (Room room : this.rooms) {
-            allRooms.add(room);
-        }
-        return allRooms;
-    }
-    
-    //TODO: Get rooms from Database
-    public ArrayList<Room> getAllAvailableRooms() {
-        ArrayList<Room> availableRooms = new ArrayList<>();
-
-        for (Room room : this.rooms) {
-            if (room.isAvailable()) {
-                availableRooms.add(room);
-            }
-        }
-        return availableRooms;
+    @PostMapping("/create")
+    public Room createRoom(Room room){
+       return this.roomService.createRoom(room);
     }
 
-    //TODO: Wegschrijven in database
-    public static void createRoom(int roomNumber, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean available) {
-        rooms.add(new Room(roomNumber, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
-    }
 }
+
+

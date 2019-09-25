@@ -4,7 +4,6 @@ import com.hotel.reservationsystem.enums.BoardType;
 import com.hotel.reservationsystem.enums.RoomType;
 import com.hotel.reservationsystem.exceptions.NotFoundException;
 import com.hotel.reservationsystem.models.*;
-import com.hotel.reservationsystem.views.ReservationView;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,14 +18,14 @@ import java.util.Date;
 public class ReservationController {
 
     private ArrayList<Reservation> reservations;
-    private ReservationView view;
+ //   private ReservationView view;
     private int reservationNumberCounter = 1;
 
     private static ReservationController instance = null;
 
     private ReservationController(){
         reservations = getReservationListFromDatabase();
-        view = new ReservationView();
+  //      view = new ReservationView();
     }
 
     public static ReservationController getInstance() { // TODO Dependency injection rather than Singleton
