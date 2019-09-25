@@ -87,21 +87,6 @@ public class Room
         return roomType;
     }
 
-    public String getRoomTypeString() {
-        switch(roomType){
-            case SINGLE:
-                return "Single Room";
-            case DOUBLE :
-                return "Double Room";
-            case DOUBLE_2:
-                return "2x Double Room";
-            case PENTHOUSE:
-                return "Penthouse";
-            default:
-                throw new IllegalStateException("Unexpected value: " + roomType);
-        }
-    }
-
     public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
     }
