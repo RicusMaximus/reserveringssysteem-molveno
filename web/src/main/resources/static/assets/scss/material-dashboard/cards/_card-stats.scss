@@ -5,13 +5,13 @@
       text-align: right;
     }
 
-    .card-icon + .card-title,
+    .card-icon + .card-titleType,
     .card-icon + .card-category{
       padding-top: 10px;
     }
 
-    &.card-header-icon .card-title,
-    &.card-header-text .card-title,
+    &.card-header-icon .card-titleType,
+    &.card-header-text .card-titleType,
     &.card-header-icon .card-category,
     &.card-header-text .card-category {
       margin: 0;

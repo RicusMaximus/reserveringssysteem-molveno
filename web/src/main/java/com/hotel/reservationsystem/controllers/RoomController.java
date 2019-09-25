@@ -28,7 +28,6 @@ public class RoomController {
     public Room createRoom(@RequestBody Room room){
        return this.roomService.createRoom(room);
     }
-
 }
 
 

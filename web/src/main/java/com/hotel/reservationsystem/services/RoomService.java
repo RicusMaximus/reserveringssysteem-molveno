@@ -15,13 +15,13 @@ public class RoomService {
     private RoomRepository roomRepository;
 
     public List<Room> getAllRooms() {
-        return this.roomRepository.getAllRooms();
+        return this.roomRepository.getRooms();
     }
 
     public ArrayList<Room> getAllAvailableRooms() {
         ArrayList<Room> availableRooms = new ArrayList<>();
 
-        for (Room room : this.roomRepository.getAllRooms()) {
+        for (Room room : this.roomRepository.getRooms()) {
             if (room.isAvailable()) {
                 availableRooms.add(room);
             }
@@ -32,7 +32,7 @@ public class RoomService {
     public Room getRoomById(int number) {
         Room roomById = null;
 
-        for (Room room : this.roomRepository.getAllRooms()) {
+        for (Room room : this.roomRepository.getRooms()) {
             if (room.getRoomNumber() == number) {
                 roomById = room;
             }

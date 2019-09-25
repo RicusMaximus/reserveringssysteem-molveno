@@ -6,14 +6,14 @@ public enum RoomType {
     DOUBLE_2("2x Double Room"),
     PENTHOUSE("Penthouse");
 
-    private String niceName;
+    private String roomType;
 
-    RoomType(String niceName) {
-        this.niceName = niceName;
+    RoomType(String roomType) {
+        this.roomType = roomType;
     }
 
     @Override
     public String toString() {
-        return niceName;
+        return roomType;
     }
 }

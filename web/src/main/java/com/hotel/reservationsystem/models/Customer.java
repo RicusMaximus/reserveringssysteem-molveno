@@ -1,11 +1,11 @@
 package com.hotel.reservationsystem.models;
-import com.hotel.reservationsystem.enums.Title;
+import com.hotel.reservationsystem.enums.TitleType;
 
 import java.util.Date;
 
 public class Customer {
     private int customerId;
-    private Title title;
+    private TitleType titleType;
     private String firstName;
     private String lastName;
     private String address;
@@ -23,12 +23,12 @@ public class Customer {
         this.customerId = customerId;
     }
 
-    public Title getTitle() {
-        return title;
+    public TitleType getTitleType() {
+        return titleType;
     }
 
-    public void setTitle(Title title) {
-        this.title = title;
+    public void setTitleType(TitleType titleType) {
+        this.titleType = titleType;
     }
 
     public String getFirstName() {

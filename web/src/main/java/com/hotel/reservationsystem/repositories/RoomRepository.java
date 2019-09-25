@@ -10,7 +10,7 @@ import java.util.List;
 public class RoomRepository {
     private List<Room> rooms = new ArrayList<>();
 
-    public List<Room> getAllRooms(){
+    public List<Room> getRooms(){
         return this.rooms;
     }
 
