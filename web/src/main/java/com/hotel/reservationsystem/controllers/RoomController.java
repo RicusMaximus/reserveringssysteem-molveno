@@ -10,7 +10,7 @@ public class RoomController {
     private static RoomController instance = null;
 
     private RoomController(){
-        this.rooms = Room.retrieveRoomData();
+        this.rooms = retrieveRoomData();
     }
 
     public static RoomController getInstance() {
@@ -45,5 +45,21 @@ public class RoomController {
     //TODO: Wegschrijven in database
     public static void createRoom(int roomNumber, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean available) {
         rooms.add(new Room(roomNumber, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
+    }
+
+
+    private ArrayList<Room> retrieveRoomData() { // TODO Retrieve from DB
+        ArrayList<Room> rooms = new ArrayList<>();
+        rooms.add(new Room(1,2, 0, "Double",
+                RoomType.DOUBLE, true, true));
+        rooms.add(new Room(2, 2, 1, "Single",
+                RoomType.DOUBLE_2, false, true));
+        rooms.add(new Room(3, 2, 0,"2x Double",
+                RoomType.PENTHOUSE, true, false));
+        rooms.add(new Room(4, 2, 5, "Penthouse",
+                RoomType.SINGLE, false, false));
+        rooms.add(new Room(5, 2, 4, "200",
+                RoomType.SINGLE, false, true));
+        return rooms;
     }
 }
