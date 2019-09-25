@@ -15,8 +15,6 @@ public class Room
     private boolean disabledFriendly;
     private boolean available;
 
-    public Room() { }
-
     public Room(int roomNumber, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean available) {
         this.roomNumber = roomNumber;
         this.price = setPrice(roomType);
@@ -25,10 +23,9 @@ public class Room
         this.bedAmount = bedAmount;
         this.roomType = roomType;
         this.disabledFriendly = disabledFriendly;
-        this.available = available;
+        this.available = available; // TODO Availabilty niet in constructor setten, maar defaulten naar false en setten bij reserveringen en datum ranges
     }
 
-    //GETTERS and SETTERS
     public int getRoomNumber() {
         return roomNumber;
     }
@@ -116,21 +113,5 @@ public class Room
 
     public void setAvailable(boolean availability) {
         this.available = availability;
-    }
-
-    public static ArrayList<Room> retrieveRoomData() {
-        ArrayList<Room> rooms = new ArrayList<>();
-        rooms.add(new Room(1,2, 0, "Double",
-                RoomType.DOUBLE, true, true));
-        rooms.add(new Room(2, 2, 1, "Single",
-                RoomType.DOUBLE_2, false, true));
-        rooms.add(new Room(3, 2, 0,"2x Double",
-                RoomType.PENTHOUSE, true, false));
-        rooms.add(new Room(4, 2, 5, "Penthouse",
-                RoomType.SINGLE, false, false));
-        rooms.add(new Room(5, 2, 4, "200",
-                RoomType.SINGLE, false, true));
-
-        return rooms;
     }
 }
