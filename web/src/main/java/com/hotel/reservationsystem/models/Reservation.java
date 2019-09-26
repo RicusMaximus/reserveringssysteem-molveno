@@ -19,6 +19,7 @@ public class Reservation {
     private ArrayList<Room> rooms;
     private boolean checkedIn;
 
+
     public Reservation(int reservationNumber, ArrayList<Room> rooms, Date startDate, Date endDate, Customer customer, BoardType boardType) {
         this.reservationNumber = reservationNumber;
         this.rooms = rooms;

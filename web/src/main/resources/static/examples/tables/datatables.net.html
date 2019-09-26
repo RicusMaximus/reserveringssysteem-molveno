@@ -1119,7 +1119,7 @@
   <!-- Library for adding dinamically elements -->
   <script src="../../assets/js/plugins/arrive.min.js"></script>
   <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>-->
   <!-- Chartist JS -->
   <script src="../../assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
@@ -1301,7 +1301,7 @@
   </script>
   <script>
     $(document).ready(function() {
-      $('#datatables').DataTable({
+      $("#datatables").DataTable({
         "pagingType": "full_numbers",
         "lengthMenu": [
           [10, 25, 50, -1],
@@ -1313,8 +1313,7 @@
           searchPlaceholder: "Search records",
         }
       });
-
-      var table = $('#datatable').DataTable();
+      var table = $('#datatables').DataTable();
 
       // Edit record
       table.on('click', '.edit', function() {

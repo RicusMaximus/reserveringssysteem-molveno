@@ -8,12 +8,22 @@ public class Customer {
     private Title title;
     private String firstName;
     private String lastName;
-    private String address;
+    private Address address;
     private String phoneNumber;
     private String email;
     private Date birthday;
 
-    public Customer() {}
+    public Customer () {} // TODO remove all usages
+
+    public Customer(Title title, String firstName, String lastName, Address address, String phoneNumber, String email, Date birthday) {
+        this.title = title;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.birthday = birthday;
+    }
 
     public int getCustomerId() {
         return customerId;
@@ -47,11 +57,11 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 

@@ -20,12 +20,9 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-    private int reservationNumberCounter = 0;
-
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String addNewReservation (@RequestBody Reservation newReservation) {
-        this.reservationService.addReservation(newReservation);
-        return "Successfully added new reservation";
+    public Reservation addNewReservation (@RequestBody Reservation newReservation) {
+        return this.reservationService.addReservation(newReservation);
     }
 
     /**
