@@ -52,6 +52,11 @@ public class RoomController {
        return this.roomService.createRoom(room);
     }
 
+    /**
+     * Delete a Room by initiating a DELETE request on the "/delete/{id}" end-point
+     * @param id A RoomNumber
+     * @return The deleted Room object
+     **/
     @DeleteMapping("/delete/{id}")
     public Room deleteRoomByID(@PathVariable int id) {
         return this.roomService.deleteRoomByID(id);
