@@ -51,6 +51,11 @@ public class RoomController {
     public Room createRoom(@RequestBody Room room){
        return this.roomService.createRoom(room);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public Room deleteRoomByID(@PathVariable int id) {
+        return this.roomService.deleteRoomByID(id);
+    }
 }
 
 

@@ -14,8 +14,13 @@ public class RoomRepository {
         return this.rooms;
     }
 
-    public Room addRoom(Room room){
+    public Room addRoom(Room room) {
         this.rooms.add(room);
+        return room;
+    }
+
+    public Room deleteRoom(Room room) {
+        this.rooms.remove(room);
         return room;
     }
 }

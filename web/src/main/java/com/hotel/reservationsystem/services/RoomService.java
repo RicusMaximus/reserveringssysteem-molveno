@@ -42,4 +42,16 @@ public class RoomService {
     public Room createRoom(Room room){
         return roomRepository.addRoom(room);
     }
+
+    public Room deleteRoomByID(int id) {
+        Room roomById = null;
+
+        for (Room room : this.roomRepository.getRooms()) {
+            if (room.getRoomNumber() == id) {
+                roomById = room;
+            }
+        }
+
+        return roomRepository.deleteRoom(roomById);
+    }
 }
