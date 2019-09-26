@@ -1,4 +1,4 @@
-package com.hotel.reservationsystem.unittest;
+package com.hotel.reservationsystem.unittests;
 
 import com.hotel.reservationsystem.models.UserInput;
 

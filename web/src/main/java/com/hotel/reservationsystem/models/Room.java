@@ -23,7 +23,7 @@ public class Room
         this.bedAmount = bedAmount;
         this.roomType = roomType;
         this.disabledFriendly = disabledFriendly;
-        this.available = available;
+        this.available = available; // TODO Availabilty niet in constructor setten, maar defaulten naar false en setten bij reserveringen en datum ranges
     }
 
     public int getRoomNumber() {

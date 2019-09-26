@@ -1,12 +1,8 @@
-package com.hotel.reservationsystem.unittest;
+package com.hotel.reservationsystem.unittests;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class UTCustomer {
-
-
-
-
+public class UtCustomer {
 }

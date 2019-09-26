@@ -1,4 +1,4 @@
-package com.hotel.reservationsystem.unittest;
+package com.hotel.reservationsystem.unittests;
 
 import com.hotel.reservationsystem.models.Reservation;
 import org.junit.*;
@@ -14,7 +14,7 @@ public class UTReservation {
 
     @Before
     public void before() {
-        this.reservation = new Reservation();
+        this.reservation = new Reservation(0,null,null,null,null,null);
     }
 
     // TODO Add tests
