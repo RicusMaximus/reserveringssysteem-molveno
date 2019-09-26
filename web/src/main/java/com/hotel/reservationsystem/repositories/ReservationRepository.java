@@ -2,7 +2,7 @@ package com.hotel.reservationsystem.repositories;
 
 import com.hotel.reservationsystem.enums.BoardType;
 import com.hotel.reservationsystem.enums.RoomType;
-import com.hotel.reservationsystem.enums.Title;
+import com.hotel.reservationsystem.enums.TitleType;
 import com.hotel.reservationsystem.exceptions.NotFoundException;
 import com.hotel.reservationsystem.models.Customer;
 import com.hotel.reservationsystem.models.Reservation;
@@ -30,7 +30,7 @@ public class ReservationRepository {
         Date date = new Date();
         Customer cust = new Customer();
         cust.setCustomerId(1);
-        cust.setTitle(Title.MR);
+        cust.setTitleType(TitleType.MR);
         cust.setFirstName("Conny");
         cust.setLastName("Feer");
         cust.setBirthday(date);
@@ -50,7 +50,7 @@ public class ReservationRepository {
                 RoomType.SINGLE, false, true));
         Customer cust2 = new Customer();
         cust2.setCustomerId(2);
-        cust2.setTitle(Title.MR);
+        cust2.setTitleType(TitleType.MR);
         cust2.setFirstName("Anna");
         cust2.setLastName("Nas");
         cust2.setBirthday(date);

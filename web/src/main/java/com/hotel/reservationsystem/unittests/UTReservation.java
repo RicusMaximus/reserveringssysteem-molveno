@@ -4,11 +4,11 @@ import com.hotel.reservationsystem.models.Reservation;
 import org.junit.*;
 import org.junit.Assert.*;
 
-public class UtReservation {
+public class UTReservation {
 
     public static Reservation reservation = null;
 
-    public UtReservation () {
+    public UTReservation() {
 
     }
 

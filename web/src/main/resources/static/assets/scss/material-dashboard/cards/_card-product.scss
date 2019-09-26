@@ -16,7 +16,7 @@
         }
     }
 
-    .card-title,
+    .card-titleType,
     .card-category,
     .card-description{
         text-align: center;
@@ -24,7 +24,7 @@
     .category{
         margin-bottom: 0;
     }
-    .category ~ .card-title{
+    .category ~ .card-titleType{
         margin-top: 0;
     }
 

@@ -1,6 +1,9 @@
 package com.hotel.reservationsystem.controllers;
 
 import com.hotel.reservationsystem.exceptions.NotFoundException;
+
+import com.hotel.reservationsystem.models.*;
+
 import com.hotel.reservationsystem.models.Reservation;
 import com.hotel.reservationsystem.services.ReservationService;
 

@@ -3,7 +3,7 @@ package com.hotel.reservationsystem.unittests;
 import com.hotel.reservationsystem.controllers.ReservationController;
 import com.hotel.reservationsystem.enums.BoardType;
 import com.hotel.reservationsystem.enums.RoomType;
-import com.hotel.reservationsystem.enums.Title;
+import com.hotel.reservationsystem.enums.TitleType;
 import com.hotel.reservationsystem.exceptions.NotFoundException;
 import com.hotel.reservationsystem.models.Customer;
 import com.hotel.reservationsystem.models.Reservation;
@@ -15,7 +15,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class UtReservationController {
+public class UTReservationController {
 
     private ReservationController reservationController;
 

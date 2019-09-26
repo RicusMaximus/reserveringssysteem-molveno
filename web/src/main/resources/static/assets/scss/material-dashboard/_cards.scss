@@ -26,7 +26,7 @@
       margin-top: 5px;
   }
 
-    .card-title{
+    .card-titleType{
         margin-top: 0.625rem;
 
         &:last-child{
@@ -98,7 +98,7 @@
     .card-header {
       border-bottom: none;
       background: transparent;
-        .title{
+        .titleType{
             color: $white-color;
         }
 
@@ -125,7 +125,7 @@
                 pointer-events: none;
                 @include shadow-big-image();
             }
-            .card-title {
+            .card-titleType {
                 position: absolute;
                 bottom: 15px;
                 left: 15px;
@@ -253,8 +253,8 @@
     &[class*="bg-"]{
         color: $white-color;
 
-        .card-title a,
-        .card-title,
+        .card-titleType a,
+        .card-titleType,
         .icon i{
             color: $white-color;
         }
@@ -343,7 +343,7 @@
     border-top: none;
   }
 
-  .card-title{
+  .card-titleType{
     margin-top: 0;
     margin-bottom: 3px;
   }
@@ -360,7 +360,7 @@
   .card-header {
     z-index: 3 !important;
 
-    .card-title{
+    .card-titleType{
       margin-bottom: 3px;
     }
 
@@ -385,7 +385,7 @@
             text-align: center;
             line-height: 33px;
         }
-        .card-title{
+        .card-titleType{
           margin-top: 15px;
           color: $black-color;
         }
@@ -399,7 +399,7 @@
             background: transparent;
             padding: 0;
         }
-        .nav-tabs-title {
+        .nav-tabs-titleType {
             float: left;
             padding: 10px 10px 10px 0;
             line-height: 24px;
@@ -409,7 +409,7 @@
 
   &.card-plain {
     .card-header {
-      &.card-header-icon + .card-body .card-title,
+      &.card-header-icon + .card-body .card-titleType,
       &.card-header-icon + .card-body .card-category {
           margin-top: -20px;
       }
@@ -486,7 +486,7 @@
       margin: 0px 15px 0;
       padding: 0;
 
-      .card-title + .card-category{
+      .card-titleType + .card-category{
         color: rgba(255, 255, 255, 0.8);
         a {
           color: $white-color;
@@ -514,7 +514,7 @@
         display: inline-block;
         margin-right: 0;
 
-        .card-title{
+        .card-titleType{
           color: $white-color;
           margin-top: 0;
         }
@@ -523,7 +523,7 @@
       position: relative;
 
       .ct-chart{
-        .card-title{
+        .card-titleType{
             color: $white-color;
         }
         .card-category{

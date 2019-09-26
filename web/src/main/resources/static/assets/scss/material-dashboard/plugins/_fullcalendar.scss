@@ -296,7 +296,7 @@ previous button's border...
 	padding: 2px 4px;
 }
 
-.fc-popover .fc-header .fc-title {
+.fc-popover .fc-header .fc-titleType {
 	margin: 0 2px;
 }
 
@@ -304,12 +304,12 @@ previous button's border...
 	cursor: pointer;
 }
 
-.fc-ltr .fc-popover .fc-header .fc-title,
+.fc-ltr .fc-popover .fc-header .fc-titleType,
 .fc-rtl .fc-popover .fc-header .fc-close {
 	float: left;
 }
 
-.fc-rtl .fc-popover .fc-header .fc-title,
+.fc-rtl .fc-popover .fc-header .fc-titleType,
 .fc-ltr .fc-popover .fc-header .fc-close {
 	float: right;
 }
@@ -877,7 +877,7 @@ a.fc-more:hover {
 	margin-left: 0;
 }
 
-/* title text */
+/* titleType text */
 
 .fc-toolbar h2 {
 	margin: 0;
@@ -1215,7 +1215,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 .fc-time-grid-event .fc-time,
-.fc-time-grid-event .fc-title {
+.fc-time-grid-event .fc-titleType {
 	padding: 0 1px;
 }
 
@@ -1224,7 +1224,7 @@ be a descendant of the grid when it is being dragged.
 	white-space: nowrap;
 }
 
-/* short mode, where time and title are on the same line */
+/* short mode, where time and titleType are on the same line */
 
 .fc-time-grid-event.fc-short .fc-content {
 	/* don't wrap to second line (now that contents will be inline) */
@@ -1232,8 +1232,8 @@ be a descendant of the grid when it is being dragged.
 }
 
 .fc-time-grid-event.fc-short .fc-time,
-.fc-time-grid-event.fc-short .fc-title {
-	/* put the time and title on the same line */
+.fc-time-grid-event.fc-short .fc-titleType {
+	/* put the time and titleType on the same line */
 	display: inline-block;
 	vertical-align: top;
 }
@@ -1250,8 +1250,8 @@ be a descendant of the grid when it is being dragged.
 	content: "\000A0-\000A0"; /* seperate with a dash, wrapped in nbsp's */
 }
 
-.fc-time-grid-event.fc-short .fc-title {
-	font-size: .85em; /* make the title text the same size as the time */
+.fc-time-grid-event.fc-short .fc-titleType {
+	font-size: .85em; /* make the titleType text the same size as the time */
 	padding: 0; /* undo padding from above */
 }
 
@@ -1396,17 +1396,17 @@ be a descendant of the grid when it is being dragged.
 	width: 1px;
 }
 
-/* make the dot closer to the event title */
+/* make the dot closer to the event titleType */
 .fc-ltr .fc-list-item-marker { padding-right: 0; }
 .fc-rtl .fc-list-item-marker { padding-left: 0; }
 
-.fc-list-item-title a {
-	/* every event title cell has an <a> tag */
+.fc-list-item-titleType a {
+	/* every event titleType cell has an <a> tag */
 	text-decoration: none;
 	color: inherit;
 }
 
-.fc-list-item-title a[href]:hover {
+.fc-list-item-titleType a[href]:hover {
 	/* hover effect only on titles with hrefs */
 	text-decoration: underline;
 }
@@ -1469,7 +1469,7 @@ be a descendant of the grid when it is being dragged.
 	.fc .fc-widget-header{
 		border: 0;
 
-		.fc-title{
+		.fc-titleType{
 			color: $white-color;
 		}
 	}
@@ -1479,7 +1479,7 @@ be a descendant of the grid when it is being dragged.
 		color: $gray-light;
 	}
 
-	.title{
+	.titleType{
 		margin-top: -9px;
 	}
 

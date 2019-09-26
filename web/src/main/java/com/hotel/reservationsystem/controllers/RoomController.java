@@ -1,65 +1,61 @@
 package com.hotel.reservationsystem.controllers;
 
-import com.hotel.reservationsystem.enums.RoomType;
 import com.hotel.reservationsystem.models.Room;
+import com.hotel.reservationsystem.services.RoomService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
+@RestController
+@RequestMapping("api/v1/room")
 public class RoomController {
-    private static ArrayList<Room> rooms;
-    private static RoomController instance = null;
 
-    private RoomController(){
-        this.rooms = retrieveRoomData();
+    @Autowired
+    private RoomService roomService;
+
+    /**
+     * Return a list of all rooms when initiating a GET request on the "/all" end-point
+     * @return a list of all rooms
+     **/
+    @GetMapping("/all")
+    public List<Room> getAllRooms(){
+        return this.roomService.getAllRooms();
     }
 
-    public static RoomController getInstance() {
-        if (instance == null) {
-            instance = new RoomController();
-        }
-        return instance;
+    /**
+     * Return a list of all available rooms when initiating a GET request on the "/available" end-point
+     * @return a list of all available rooms
+     **/
+    @GetMapping("/available")
+    public List<Room> getAllAvailableRooms(){
+        return this.roomService.getAllAvailableRooms();
     }
 
-    //TODO: Get rooms from Database
-    public ArrayList<Room> getAllRooms() {
-        ArrayList<Room> allRooms = new ArrayList<>();
-
-        for (Room room : this.rooms) {
-            allRooms.add(room);
-        }
-        return allRooms;
-    }
-    
-    //TODO: Get rooms from Database
-    public ArrayList<Room> getAllAvailableRooms() {
-        ArrayList<Room> availableRooms = new ArrayList<>();
-
-        for (Room room : this.rooms) {
-            if (room.isAvailable()) {
-                availableRooms.add(room);
-            }
-        }
-        return availableRooms;
+    /**
+     * Return a room based on the id parameter when initiating a GET request on the "/one/{id}" end-point
+     * @param id The RoomNumber of a Room object
+     * @return a room, based on the id parameter
+     **/
+    @GetMapping("/one/{id}")
+    public Room getRoomByID(@PathVariable int id) {
+        return this.roomService.getRoomById(id);
     }
 
-    //TODO: Wegschrijven in database
-    public static void createRoom(int roomNumber, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean available) {
-        rooms.add(new Room(roomNumber, maxAdults, maxChildren, bedAmount, roomType, disabledFriendly, available));
+    /**
+     * Create a new Room by sending the request body when initiating a POST request on the "/create" end-point
+     * @param room A Room object
+     * @return The created Room object
+     **/
+    @PostMapping("/create")
+    public Room createRoom(@RequestBody Room room){
+       return this.roomService.createRoom(room);
     }
 
-
-    private ArrayList<Room> retrieveRoomData() { // TODO Retrieve from DB
-        ArrayList<Room> rooms = new ArrayList<>();
-        rooms.add(new Room(1,2, 0, "Double",
-                RoomType.DOUBLE, true, true));
-        rooms.add(new Room(2, 2, 1, "Single",
-                RoomType.DOUBLE_2, false, true));
-        rooms.add(new Room(3, 2, 0,"2x Double",
-                RoomType.PENTHOUSE, true, false));
-        rooms.add(new Room(4, 2, 5, "Penthouse",
-                RoomType.SINGLE, false, false));
-        rooms.add(new Room(5, 2, 4, "200",
-                RoomType.SINGLE, false, true));
-        return rooms;
+    @DeleteMapping("/delete/{id}")
+    public Room deleteRoomByID(@PathVariable int id) {
+        return this.roomService.deleteRoomByID(id);
     }
 }
+
+
