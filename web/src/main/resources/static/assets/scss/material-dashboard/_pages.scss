@@ -248,7 +248,7 @@
             margin: 0 auto;
             padding: 0px;
 
-            .info-title {
+            .info-titleType {
                 color: #3C4858;
                 margin: 30px 0 15px;
             }
@@ -350,7 +350,7 @@
 .pricing-page{
   padding: 120px 0;
 
-    .title{
+    .titleType{
         color: $white-color;
         margin-top: 5vh;
     }
@@ -362,7 +362,7 @@
 
     .card-plain{
         .icon i,
-        .card-title{
+        .card-titleType{
             color: $white-color;
         }
     }

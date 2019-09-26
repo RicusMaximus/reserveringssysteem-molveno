@@ -1,12 +1,10 @@
 package com.hotel.reservationsystem.controllers;
 
-import com.hotel.reservationsystem.enums.RoomType;
 import com.hotel.reservationsystem.models.Room;
 import com.hotel.reservationsystem.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,7 +28,6 @@ public class RoomController {
     public Room createRoom(@RequestBody Room room){
        return this.roomService.createRoom(room);
     }
-
 }
 
 

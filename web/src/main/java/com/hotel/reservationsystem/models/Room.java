@@ -15,8 +15,6 @@ public class Room
     private boolean disabledFriendly;
     private boolean available;
 
-    public Room() { }
-
     public Room(int roomNumber, int maxAdults, int maxChildren, String bedAmount, RoomType roomType, boolean disabledFriendly, boolean available) {
         this.roomNumber = roomNumber;
         this.price = setPrice(roomType);
@@ -28,7 +26,6 @@ public class Room
         this.available = available;
     }
 
-    //GETTERS and SETTERS
     public int getRoomNumber() {
         return roomNumber;
     }

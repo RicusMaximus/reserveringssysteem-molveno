@@ -7,11 +7,12 @@ public enum BoardType {
 
     private String boardType;
 
-    public String getBoardType() {
-        return boardType;
+    BoardType(String boardType) {
+        this.boardType = boardType;
     }
 
-    BoardType(String s) {
-        this.boardType = s;
+    @Override
+    public String toString() {
+        return boardType;
     }
 }

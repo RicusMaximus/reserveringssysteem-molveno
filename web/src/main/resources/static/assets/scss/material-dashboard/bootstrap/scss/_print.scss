@@ -31,8 +31,8 @@
     //  content: " (" attr(href) ")";
     //}
 
-    abbr[title]::after {
-      content: " (" attr(title) ")";
+    abbr[titleType]::after {
+      content: " (" attr(titleType) ")";
     }
 
     // Bootstrap specific; comment the following selector out

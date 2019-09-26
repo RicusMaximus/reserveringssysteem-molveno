@@ -22,7 +22,7 @@
   }
 
   // Modal header
-  // Top section of the modal w/ title and dismiss
+  // Top section of the modal w/ titleType and dismiss
   .modal-header {
     border-bottom: none;
     padding-top:    24px;
@@ -30,7 +30,7 @@
     padding-bottom: 0;
     padding-left:   24px;
 
-    .modal-title{
+    .modal-titleType{
       text-align: center;
       width: 100%;
     }
@@ -118,7 +118,7 @@
                 padding: 0px 0px 20px;
             }
 
-            .modal-title{
+            .modal-titleType{
                 text-align: center;
                 width: 100%;
             }

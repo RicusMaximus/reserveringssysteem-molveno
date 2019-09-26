@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RoomService {
@@ -13,19 +14,14 @@ public class RoomService {
     @Autowired
     private RoomRepository roomRepository;
 
-    public ArrayList<Room> getAllRooms() {
-        ArrayList<Room> allRooms = new ArrayList<>();
-
-        for (Room room : this.roomRepository.getAllRooms()) {
-            allRooms.add(room);
-        }
-        return allRooms;
+    public List<Room> getAllRooms() {
+        return this.roomRepository.getRooms();
     }
 
     public ArrayList<Room> getAllAvailableRooms() {
         ArrayList<Room> availableRooms = new ArrayList<>();
 
-        for (Room room : this.roomRepository.getAllAvailableRooms()) {
+        for (Room room : this.roomRepository.getRooms()) {
             if (room.isAvailable()) {
                 availableRooms.add(room);
             }
@@ -33,8 +29,18 @@ public class RoomService {
         return availableRooms;
     }
 
+    public Room getRoomById(int number) {
+        Room roomById = null;
+
+        for (Room room : this.roomRepository.getRooms()) {
+            if (room.getRoomNumber() == number) {
+                roomById = room;
+            }
+        }
+        return roomById;
+    }
+
     public Room createRoom(Room room){
         return roomRepository.addRoom(room);
     }
-
 }
