@@ -232,26 +232,28 @@
                                         </tbody>-->
                                         <thead>
                                             <tr>
-                                                <th>Reservation number</th>
-                                                <th>Date</th>
+                                                <th>ID</th>
+                                                <th>Reservation date</th>
                                                 <th>Check-In date</th>
                                                 <th>Check-Out date</th>
                                                 <th>Customer</th>
-                                                <th>Board Type</th>
+                                                <th>Boardtype</th>
                                                 <th>Rooms</th>
+                                                <th class="disabled-sorting text-right">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Reservation number</th>
-                                                <th>Date</th>
+                                                <th>ID</th>
+                                                <th>Reservation date</th>
                                                 <th>Check-In date</th>
                                                 <th>Check-Out date</th>
                                                 <th>Customer</th>
-                                                <th>Board Type</th>
+                                                <th>Boardtype</th>
                                                 <th>Rooms</th>
+                                                <th class="disabled-sorting text-right">Actions</th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -446,8 +448,6 @@
 <script src="assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="assets/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
-<!-- Material Dashboard DEMO methods, don't include it in your project! -->
-<script src="assets/demo/demo.js"></script>
 <script>
     $(document).ready(function() {
       $().ready(function() {
@@ -685,14 +685,48 @@
                 search: "_INPUT_",
                 searchPlaceholder: "Search records",
             },
+            "columnDefs": [
+                { className: "text-right", "targets": [ 7 ] }
+            ],
             columns: [
                 { "data": "reservationNumber" },
-                { "data": "reservationDate" },
-                { "data": "startDate" },
-                { "data": "endDate" },
-                { "data": "customer" },
-                { "data": "boardType" },
-                { "data": "rooms" },
+                { "data": function ( data, type, row ) {
+                    date = new Date(Date.parse(data.reservationDate));
+                    return date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear();
+                }},
+                { "data": function ( data, type, row ) {
+                    date = new Date(Date.parse(data.startDate));
+                    return date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear();
+                }},
+                { "data": function ( data, type, row ) {
+                    date = new Date(Date.parse(data.endDate));
+                    return date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear();
+                }},
+                { "data": function ( data, type, row ) {
+                    return data.customer.firstName + " " + data.customer.lastName;
+                }},
+                { "data": function ( data, type, row ) {
+                    if (data.boardType == "ACCOMMODATIONS") {
+                        return "Accommodations";
+                    } else if (data.boardType == "BED_AND_BREAKFAST") {
+                        return "Bed & Breakfast";
+                    } else return "Half Board";
+                }},
+                { "data": function ( data, type, row ) {
+                    console.log(data.rooms);
+                    var rooms = "";
+                    for (var i = 0; i < data.rooms.length; i++) {
+                        rooms += data.rooms[i];
+                    }
+                    return rooms;
+                }},
+                { data: null,
+                    render: function ( data, type, row ) {
+                        return '<a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">info</i></a>' +
+                                '<a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>' +
+                                '<a href="#" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>';
+                    }
+                }
             ]
         });
 
